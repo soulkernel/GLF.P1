@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área de Conservación | Galápagos Life Fund</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Bilingual CSS Engine: Only the active language is displayed */
+    body.lang-es .lang-en { display: none !important; }
+    body.lang-en .lang-es { display: none !important; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .tab-content { display: block !important; page-break-after: always; }
+    }
+  </style>
+  <script>
+    // Browser language detection with instant switcher (No redirection, single file)
+    function getInitialLanguage() {
+      try {
+        const urlParam = new URLSearchParams(window.location.search).get('lang');
+        if (urlParam === 'es' || urlParam === 'en') return urlParam;
+        const stored = localStorage.getItem('glf_lang');
+        if (stored === 'es' || stored === 'en') return stored;
+      } catch (e) {}
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      return navLang.startsWith('en') ? 'en' : 'es';
+    }
+
+    let currentLang = getInitialLanguage();
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.body.classList.remove('lang-es', 'lang-en');
+      document.body.classList.add('lang-' + lang);
+      try { localStorage.setItem('glf_lang', lang); } catch (e) {}
+
+      // Update button toggle states
+      document.querySelectorAll('.btn-lang-es').forEach(btn => {
+        if (lang === 'es') {
+          btn.classList.add('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.remove('text-white/80', 'text-slate-500');
+        } else {
+          btn.classList.remove('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.add('text-white/80');
+        }
+      });
+      document.querySelectorAll('.btn-lang-en').forEach(btn => {
+        if (lang === 'en') {
+          btn.classList.add('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.remove('text-white/80', 'text-slate-500');
+        } else {
+          btn.classList.remove('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.add('text-white/80');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setLanguage(currentLang);
+    });
+  </script>
+</head>
+<body class="lang-es bg-slate-50 text-slate-800 antialiased font-sans p-4 md:p-8">
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- HEADER / HERO BILINGÜE -->
+    <div class="bg-gradient-to-r from-emerald-900 via-teal-800 to-cyan-900 text-white rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+        <svg width="320" height="320" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span class="bg-emerald-500/30 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/40">
+              Galápagos Life Fund (GLF)
+            </span>
+            <span class="bg-cyan-500/30 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-400/40">
+              <span class="lang-es">Producto 1: Diagnóstico Institucional</span>
+              <span class="lang-en">Deliverable 1: Institutional AS-IS Diagnosis</span>
+            </span>
+            <span class="bg-amber-500/30 text-amber-200 text-xs font-semibold px-3 py-1 rounded-full border border-amber-400/40">
+              <span class="lang-es">Área de Conservación</span>
+              <span class="lang-en">Marine Conservation Department (Government Projects)</span>
+            </span>
+            <span class="bg-emerald-400/20 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full border border-emerald-300/40">
+              <span class="lang-es">Borrador de diagnóstico V1</span>
+              <span class="lang-en">Diagnostic Draft V1</span>
+            </span>
+          </div>
+
+          <h1 class="text-2xl md:text-4xl font-black tracking-tight text-white">
+            <span class="lang-es">Área de Conservación</span>
+            <span class="lang-en">Marine Conservation Department (Government Projects)</span>
+          </h1>
+
+          <p class="text-emerald-100 text-sm md:text-base mt-2 max-w-3xl leading-relaxed">
+            <span class="lang-es">Gestión y Ejecución Interna de Proyectos de Gobierno de Conservación Marina, Coordinación Gubernamental (GoE: DPNG, MAATE, Armada) y Adquisición de Bienes y Servicios Especializados. Diagnóstico factual AS-IS, mapeo de herramientas, catálogo de procedimientos estándar y arquitectura TO-BE.</span>
+            <span class="lang-en">Internal Management and Execution of Marine Conservation Government Projects, Public Inter-Institutional Coordination (GoE: DPNG, MAATE, Navy), and Specialized Procurement. Factual AS-IS diagnosis, tools mapping, standard operating procedures catalog, and TO-BE architecture.</span>
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row md:flex-col items-end gap-2 shrink-0">
+          <!-- BILINGUAL INSTANT SWITCHER BUTTON -->
+          <div class="no-print inline-flex items-center rounded-lg bg-black/30 p-1 border border-white/20 backdrop-blur-sm shadow-inner">
+            <button type="button" onclick="setLanguage('es')" class="btn-lang-es px-3 py-1 text-xs rounded transition font-semibold bg-white text-emerald-950 font-bold shadow-sm">ES</button>
+            <button type="button" onclick="setLanguage('en')" class="btn-lang-en px-3 py-1 text-xs rounded transition font-semibold text-white/80 hover:text-white">EN</button>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/20 text-right w-full sm:w-auto">
+            <p class="text-xs text-emerald-200 font-medium">
+              <span class="lang-es">Responsables Oficiales GLF:</span>
+              <span class="lang-en">Official GLF Leads:</span>
+            </p>
+            <p class="text-sm font-bold text-white">
+              <span class="lang-es">Danny Rueda (Oficial de Conservación)</span>
+              <span class="lang-en">Danny Rueda (Conservation Officer)</span>
+            </p>
+            <p class="text-xs text-slate-300">
+              <span class="lang-es">Área de Conservación</span>
+              <span class="lang-en">Marine Conservation Department (Government Projects)</span>
+            </p>
+          </div>
+
+          <button onclick="window.print()" class="no-print bg-white/20 hover:bg-white/30 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            <span class="lang-es">Imprimir / Guardar PDF</span>
+            <span class="lang-en">Print / PDF</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS DE NAVEGACIÓN -->
+    <div class="no-print bg-white rounded-xl shadow-sm border border-slate-200 p-2 flex flex-wrap items-center justify-between gap-2 sticky top-2 z-50">
+      <div class="flex flex-wrap gap-2">
+        <button onclick="switchTab('tab-proceso')" id="btn-tab-proceso" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all bg-emerald-600 text-white shadow-sm">
+          <span class="lang-es">1. Proceso y Ciclo AS-IS</span>
+          <span class="lang-en">1. AS-IS Process & Cycle</span>
+        </button>
+        <button onclick="switchTab('tab-herramientas')" id="btn-tab-herramientas" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">2. Herramientas & Repositorios</span>
+          <span class="lang-en">2. Tools & Repositories</span>
+        </button>
+        <button onclick="switchTab('tab-brechas')" id="btn-tab-brechas" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">3. Brechas & Riesgos</span>
+          <span class="lang-en">3. Gaps & Risks</span>
+        </button>
+        <button onclick="switchTab('tab-sops')" id="btn-tab-sops" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">4. Procedimientos (SOPs)</span>
+          <span class="lang-en">4. Procedures (SOPs)</span>
+        </button>
+        <button onclick="switchTab('tab-tech')" id="btn-tab-tech" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">5. Transformación Digital con IA</span>
+          <span class="lang-en">5. Digital Transformation & AI</span>
+        </button>
+        
+      </div>
+
+      <!-- Compact Switcher in Navigation Bar -->
+      <div class="inline-flex items-center rounded-lg bg-slate-100 p-1 border border-slate-200 text-xs">
+        <button type="button" onclick="setLanguage('es')" class="btn-lang-es px-2 py-0.5 rounded transition">ES</button>
+        <button type="button" onclick="setLanguage('en')" class="btn-lang-en px-2 py-0.5 rounded transition">EN</button>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 1: PROCESO Y CICLO AS-IS ==================== -->
+    <div id="tab-proceso" class="tab-content space-y-6">
+      
+      <!-- KPI Cards (Bilingual) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">Nivel de Evidencia</span>
+            <span class="lang-en">Level of Evidence</span>
+          </p>
+          <p class="text-xl font-bold text-emerald-700 mt-1">
+            <span class="lang-es">Alto</span>
+            <span class="lang-en">High</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Archivos Factuales GLF</span>
+            <span class="lang-en">GLF Factual Files</span>
+          </p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">Fases del Proceso</span>
+            <span class="lang-en">Process Phases</span>
+          </p>
+          <p class="text-xl font-bold text-cyan-700 mt-1">
+            <span class="lang-es">5 Fases</span>
+            <span class="lang-en">5 Phases</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Secuencia Cronológica</span>
+            <span class="lang-en">Chronological Order</span>
+          </p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">Brechas Críticas</span>
+            <span class="lang-en">Critical Gaps</span>
+          </p>
+          <p class="text-xl font-bold text-red-600 mt-1">
+            <span class="lang-es">4 Hallazgos</span>
+            <span class="lang-en">4 Findings</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Oportunidades de Mejora</span>
+            <span class="lang-en">Improvement Points</span>
+          </p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">SOPs a Formalizar</span>
+            <span class="lang-en">SOPs to Standardize</span>
+          </p>
+          <p class="text-xl font-bold text-amber-600 mt-1">
+            <span class="lang-es">4 Manuales</span>
+            <span class="lang-en">4 Manuals</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Estandarización Inmediata</span>
+            <span class="lang-en">Immediate Adoption</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Resumen Factual Box (Bilingual) -->
+      <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">Síntesis del Diagnóstico AS-IS</h3>
+          <p class="text-sm text-emerald-800 mt-1 leading-relaxed">El Área de Conservación ejecuta de forma directa e interna los programas de conservación marina derivados de la conversión de deuda, en estrecha articulación con las instituciones del Estado ecuatoriano (GoE): la Dirección del Parque Nacional Galápagos (DPNG/MAATE) y la Armada del Ecuador (ARE/DIRNEA). Su labor se enfoca primordialmente en el control y vigilancia de la Reserva Marina Hermandad (RMH), operaciones navales, carenamiento y repotenciación de embarcaciones patrulleras, mantenimiento de boyas y sistemas de monitoreo satelital. Es fundamental NO confundir estos proyectos de gobierno ejecutados internamente con las subvenciones concursables externas.</p>
+          <p class="text-xs text-emerald-700 mt-2 font-medium">Nota de Reserva: En estricto cumplimiento institucional, se ha excluido cualquier dato o monto presupuestario por tratarse de información confidencial.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">AS-IS Diagnosis Executive Summary</h3>
+          <p class="text-sm text-emerald-800 mt-1 leading-relaxed">The Conservation Department directly and internally executes the marine conservation programs stemming from the debt conversion, working in close partnership with Ecuadorian State entities (GoE): the Galapagos National Park Directorate (DPNG/MAATE) and the Ecuadorian Navy (ARE/DIRNEA). Its core focus centers on surveillance, patrolling, and enforcement in the Hermandad Marine Reserve (HMR), naval vessel overhaul, careening, patrol boat repowering, oceanic buoys, and satellite monitoring. It is essential NOT to confuse these internally managed Government Projects with external competitive grants.</p>
+          <p class="text-xs text-emerald-700 mt-2 font-medium">Confidentiality Note: In strict compliance with institutional guidelines, all budget data has been omitted as confidential.</p>
+        </div>
+      </div>
+
+      <!-- Cronología de Fases (Bilingual) -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+          <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-sm font-bold">1</span>
+          <span class="lang-es">Ciclo Cronológico de Ejecución (5 Fases Identificadas)</span>
+          <span class="lang-en">Chronological Execution Cycle (5 Identified Phases)</span>
+        </h2>
+        
+        <div class="lang-es relative border-l-2 border-emerald-500 ml-4 md:ml-6 pl-6 md:pl-8 space-y-8 my-6">
+          
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-cyan-600 border-4 border-white shadow"></div>
+              <div class="bg-cyan-50/50 border border-cyan-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-cyan-800 bg-cyan-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 1: Planificación Operativa Anual y Coordinación Interinstitucional
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Anual / Trimestral</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Definición conjunta de actividades prioritarias con la DPNG (guardaparques) y la Armada (capitanías/DIRNEA). Mapeo de actividades de patrullaje marítimo, carenamiento de lanchas guardacostas, boyado y vigilancia aérea/satelital.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Plan de Manejo RMH, solicitudes técnicas de DPNG y Armada, POA in...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Matriz de planificación operativa de proyectos de gobierno....</span>
+                  <span class="bg-cyan-100 text-cyan-800 px-2 py-1 rounded font-semibold">Líder: Oficial de Conservación (Danny Rueda) y Técnicos</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-indigo-600 border-4 border-white shadow"></div>
+              <div class="bg-indigo-50/50 border border-indigo-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-indigo-800 bg-indigo-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 2: Gestión Presupuestaria y Reformas de Proyectos de Gobierno
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Continuo / Trimestral</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Estructuración de presupuestos por nivel institucional (Directa vs. N1). Registro y control del historial de reformas presupuestarias entre partidas operativas. Conciliación de compromisos y saldos disponibles.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Libro 'Ejecución proyecto Gobierno Schubert.xlsx' (hojas: Presupu...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Hojas de balance presupuestario de gobierno actualizadas....</span>
+                  <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Líder: Oficial de Conservación y Asesor Legal de Conservación</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-amber-600 border-4 border-white shadow"></div>
+              <div class="bg-amber-50/50 border border-amber-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 3: Contratación de Bienes y Servicios Operativos
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Según requerimiento operativo</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Elaboración de Términos de Referencia (TDR) para carenamiento, repuestos navales, sensores y suministros. Consulta y selección en la 'Base de Datos de Proveedores Actualizada'. Verificación de idoneidad técnica y comercial. Coordinación con Cumplimiento para screening KYC.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: TDRs técnicos, Base_de_Datos_Proveedores_Actualizada.xlsx, cotiza...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Órdenes de servicio, contratos de provisión y expedientes de adqu...</span>
+                  <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold">Líder: Abogado de Conservación (Danilo Jaya) y Técnicos (Jeiser Vernaza / Raquel Cedeño)</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-purple-600 border-4 border-white shadow"></div>
+              <div class="bg-purple-50/50 border border-purple-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-purple-800 bg-purple-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 4: Ejecución en Campo y Recepción de Obras/Bienes
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Variable por contrato</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Supervisión de trabajos en astilleros navales o áreas protegidas. Verificación física de repuestos instalados y boyas fondeadas. Diligenciamiento de Actas de Entrega-Recepción provisionales y definitivas.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Bitácoras de trabajo, informes técnicos de astillero, registros f...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Actas de entrega-recepción suscritas a conformidad por Conservaci...</span>
+                  <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded font-semibold">Líder: Técnicos de Conservación (Jeiser Vernaza / Raquel Cedeño)</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-rose-600 border-4 border-white shadow"></div>
+              <div class="bg-rose-50/50 border border-rose-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-rose-800 bg-rose-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 5: Liquidación Financiera y Rendición de Cuentas Trimestral
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Trimestral</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Consolidación de facturas, planillas y soportes contables. Llenado del formato 'REPORTE FINANCIERO GLF DPNG.xlsx' (8 pestañas: Detalle de Gastos, Reporte Mensual-Trimestral, Resumen Total, Reformas). Remisión a la Dirección Financiera para liquidación y reporte oficial al MAATE.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Facturas validadas, comprobantes de retención, actas de recepción...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Reporte financiero trimestral GLF-DPNG suscrito y conciliado....</span>
+                  <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded font-semibold">Líder: Oficial de Conservación y Dirección Financiera</span>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+        <div class="lang-en relative border-l-2 border-emerald-500 ml-4 md:ml-6 pl-6 md:pl-8 space-y-8 my-6">
+          
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-cyan-600 border-4 border-white shadow"></div>
+              <div class="bg-cyan-50/50 border border-cyan-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-cyan-800 bg-cyan-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 1: Annual Operational Planning & Inter-Agency Coordination
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Annual / Quarterly</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Joint identification of priority enforcement actions with DPNG (park rangers) and the Navy (DIRNEA/Coast Guard). Mapping of sea patrol routes, patrol boat maintenance, oceanic buoy moorings, and radar/satellite tracking.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: HMR Management Plan, technical requests from DPNG/Navy, instituti...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Government Projects Operational Planning Matrix....</span>
+                  <span class="bg-cyan-100 text-cyan-800 px-2 py-1 rounded font-semibold">Lead: Conservation Officer (Danny Rueda) and Technicians</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-indigo-600 border-4 border-white shadow"></div>
+              <div class="bg-indigo-50/50 border border-indigo-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-indigo-800 bg-indigo-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 2: Budget Management & Government Project Reallocations
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Continuous / Quarterly</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Budget structuring by institutional level (Direct vs. N1). Logging and tracking budget reform history between operational line items. Reconciling committed funds against uncommitted balances.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: 'Ejecución proyecto Gobierno Schubert.xlsx' workbook (Sheets: Ini...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Updated government project budget balances....</span>
+                  <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Lead: Conservation Officer and Conservation Legal Counsel</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-amber-600 border-4 border-white shadow"></div>
+              <div class="bg-amber-50/50 border border-amber-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 3: Procurement of Operational Goods and Services
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">As required by operations</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Drafting Terms of Reference (TOR) for vessel dry-docking, naval spare parts, sensors, and protective gear. Sourcing and vendor selection in the 'Updated Suppliers Database'. Verifying technical qualifications and coordinating KYC checks with Compliance.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Technical TORs, Base_de_Datos_Proveedores_Actualizada.xlsx, marke...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Service orders, supply contracts, and procurement files....</span>
+                  <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold">Lead: Conservation Legal Counsel (Danilo Jaya) and Technicians (Jeiser Vernaza / Raquel Cedeño)</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-purple-600 border-4 border-white shadow"></div>
+              <div class="bg-purple-50/50 border border-purple-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-purple-800 bg-purple-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 4: Field Supervision & Asset Delivery-Reception
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Variable per contract</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">On-site supervision in naval shipyards or marine protected areas. Physical verification of installed parts and deployed buoys. Signing provisional and final Delivery-Reception Acts.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Shipyard logs, contractor technical inspection reports, photo log...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Executed Delivery-Reception Acts approved by Conservation and DPN...</span>
+                  <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded font-semibold">Lead: Conservation Technicians (Jeiser Vernaza / Raquel Cedeño)</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-rose-600 border-4 border-white shadow"></div>
+              <div class="bg-rose-50/50 border border-rose-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-rose-800 bg-rose-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 5: Financial Clearance & Quarterly Accountability
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Quarterly</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Consolidating invoices, tax withholdings, and payment vouchers. Completing the 'REPORTE FINANCIERO GLF DPNG.xlsx' workbook (8 sheets: Expense Details, Monthly-Quarterly Report, Summary, Reforms). Submitting to Finance for final clearance and official reporting to MAATE.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Validated invoices, tax vouchers, delivery-reception acts....</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Executed and reconciled DPNG quarterly financial report....</span>
+                  <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded font-semibold">Lead: Conservation Officer and Finance Director</span>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: HERRAMIENTAS & REPOSITORIOS ==================== -->
+    <div id="tab-herramientas" class="tab-content space-y-6 hidden">
+      
+      <!-- Fuentes Revisadas -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-base font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <span class="w-6 h-6 bg-teal-100 text-teal-800 rounded-md flex items-center justify-center text-xs font-bold">A</span>
+          <span class="lang-es">Inventario Exhaustivo de Archivos Fuente Revisados</span>
+          <span class="lang-en">Exhaustive Inventory of Reviewed Source Files</span>
+        </h2>
+        <div class="lang-es">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+            <li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Ejecución proyecto Gobierno Schubert.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>REPORTE FINANCIERO GLF DPNG.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Base_de_Datos_Proveedores_Actualizada.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Presupuesto GLF 2025_2026_2027.docx (análisis cualitativo y de gobernanza)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>STAFF GLF 2026.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Informe_GOB_digital-junio-2024.pdf (Plan de Manejo Hermandad)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>1.-Ministerial-Agreement_final-Hermandad-May-2022.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Decreto_ejecutivo_no._735.pdf</li>
+          </ul>
+        </div>
+        <div class="lang-en">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+            <li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Ejecución proyecto Gobierno Schubert.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>REPORTE FINANCIERO GLF DPNG.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Base_de_Datos_Proveedores_Actualizada.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Presupuesto GLF 2025_2026_2027.docx (qualitative governance analysis, figures reserved)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>STAFF GLF 2026.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Informe_GOB_digital-junio-2024.pdf (HMR Management Plan)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>1.-Ministerial-Agreement_final-Hermandad-May-2022.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Decreto_ejecutivo_no._735.pdf</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tabla de Herramientas -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-teal-100 text-teal-800 rounded-md flex items-center justify-center text-xs font-bold">B</span>
+          <span class="lang-es">Herramientas, Hojas de Cálculo y Repositorios Actuales</span>
+          <span class="lang-en">Current Tools, Spreadsheets and Data Stores</span>
+        </h2>
+        <div class="lang-es overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Herramienta / Archivo</th>
+                <th class="p-3">Tipo</th>
+                <th class="p-3">Uso Operativo</th>
+                <th class="p-3">Evaluación de Brecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Ejecución proyecto Gobierno Schubert.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Libro Maestro de Control Presupuestario</td>
+              <td class="p-3 text-slate-700 text-xs">Seguimiento de códigos de proceso (ej. GLF-GOB-001-2026-DIR-ARE), control de comprometido vs. ejecutado y reformas.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Crítica: Dependencia extrema de macros y fórmulas complejas de Excel; riesgo de desactualización y falta de enlace contable.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">REPORTE FINANCIERO GLF DPNG.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Plantilla de Rendición Financiera</td>
+              <td class="p-3 text-slate-700 text-xs">Consolidación trimestral de gastos por actividad de fortalecimiento operativo del sistema de reservas.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Alta: Libro de 8 pestañas con doble digitación de comprobantes y fórmulas de enlace inter-hojas propensas a rotura.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Base_de_Datos_Proveedores_Actualizada.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Directorio de Proveedores</td>
+              <td class="p-3 text-slate-700 text-xs">Registro de razones sociales, RUC, tipo de bien/servicio y localización en Santa Cruz/San Cristóbal.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Media: Registro plano sin calificación histórica de desempeño, sin registro de certificaciones ni alertas KYC automáticas.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Archivos Locales y Carpetas Compartidas</td>
+              <td class="p-3 text-slate-500 text-xs">Almacenamiento Documental</td>
+              <td class="p-3 text-slate-700 text-xs">Custodia de TDRs, cotizaciones, actas de carenamiento y reportes de campo.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Alta: Dispersión entre computadoras de los técnicos y carpetas de Drive sin nomenclatura unificada.</span></td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        <div class="lang-en overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Tool / File</th>
+                <th class="p-3">Type</th>
+                <th class="p-3">Operational Use</th>
+                <th class="p-3">Gap Evaluation</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Ejecución proyecto Gobierno Schubert.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Master Budget Control Workbook</td>
+              <td class="p-3 text-slate-700 text-xs">Tracks process codes (e.g. GLF-GOB-001-2026-DIR-ARE), committed vs. disbursed expenses, and reforms.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Critical: Extreme reliance on complex formulas and macros; lack of transactional linkage to GLF accounting software.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">REPORTE FINANCIERO GLF DPNG.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Quarterly Accountability Template</td>
+              <td class="p-3 text-slate-700 text-xs">Quarterly consolidation of expenditures for reserve system strengthening activities.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">High: Multi-sheet workbook requiring repetitive manual voucher entry and prone to broken cell links.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Base_de_Datos_Proveedores_Actualizada.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Supplier Directory</td>
+              <td class="p-3 text-slate-700 text-xs">Spreadsheet listing business names, tax IDs (RUC), goods/services categories, and island locations.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Medium: Flat list lacking vendor performance history, certification tracking, or automatic KYC expiry alerts.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Local Disks & Shared Drives</td>
+              <td class="p-3 text-slate-500 text-xs">Unstructured File Storage</td>
+              <td class="p-3 text-slate-700 text-xs">Houses TORs, contractor quotes, shipyard certificates, and field reports.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">High: Dispersed across staff laptops and Google Drive folders without uniform taxonomies.</span></td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tabla de Roles -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-teal-100 text-teal-800 rounded-md flex items-center justify-center text-xs font-bold">C</span>
+          <span class="lang-es">Mapeo de Roles y Responsabilidades</span>
+          <span class="lang-en">Roles and Functional Responsibilities Mapping</span>
+        </h2>
+        <div class="lang-es overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Rol / Cargo Oficial</th>
+                <th class="p-3">Nivel Funcional</th>
+                <th class="p-3">Atribuciones y Responsabilidades</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Oficial de Conservación</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Liderazgo de Área</td>
+              <td class="p-3 text-slate-600 text-xs">Lidera la relación técnica con DPNG y Armada, coordina la planificación de patrullajes y supervisa la ejecución global de conservación marina.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Abogado de Conservación</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Soporte Jurídico de Área</td>
+              <td class="p-3 text-slate-600 text-xs">Redacta contratos de adquisición de bienes y servicios navales, revisa TDRs y asegura el cumplimiento de convenios interinstitucionales.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Técnicos de Conservación (2 posiciones)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Operaciones Técnicas de Campo</td>
+              <td class="p-3 text-slate-600 text-xs">Supervisan obras de carenamiento, inspeccionan suministros, coordinan con guardaparques y recopilan verificables técnicos.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Dirección del Parque Nacional Galápagos (DPNG/MAATE)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Entidad Estatal Contraparte</td>
+              <td class="p-3 text-slate-600 text-xs">Co-ejecutor gubernamental de actividades de conservación y beneficiario directo de bienes y equipos de vigilancia.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Armada del Ecuador (ARE / DIRNEA)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Entidad Estatal Contraparte</td>
+              <td class="p-3 text-slate-600 text-xs">Ejecuta operaciones de patrullaje marítimo e interdicción en la Reserva Hermandad; opera las embarcaciones repotenciadas.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Proveedores Locales e Internacionales</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Contratistas</td>
+              <td class="p-3 text-slate-600 text-xs">Suministran repuestos navales, servicios de astillero, boyas oceánicas, sistemas tecnológicos y equipos de protección.</td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        <div class="lang-en overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Official Role / Position</th>
+                <th class="p-3">Functional Level</th>
+                <th class="p-3">Attributions and Responsibilities</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Conservation Officer</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Department Leadership</td>
+              <td class="p-3 text-slate-600 text-xs">Leads high-level technical coordination with DPNG and Navy, oversees maritime patrol planning, and supervises overall marine conservation programs.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Conservation Legal Counsel</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">In-Department Legal Support</td>
+              <td class="p-3 text-slate-600 text-xs">Drafts naval goods/services contracts, reviews procurement TORs, and ensures compliance with inter-institutional agreements.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Conservation Technicians (2 positions)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Field Technical Operations</td>
+              <td class="p-3 text-slate-600 text-xs">Supervise shipyard overhauls, inspect supplies, coordinate with rangers, and compile field verification evidence.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Galapagos National Park Directorate (DPNG/MAATE)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Government Co-Executor</td>
+              <td class="p-3 text-slate-600 text-xs">Government partner executing joint marine conservation activities and direct beneficiary of surveillance assets.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Ecuadorian Navy (ARE / DIRNEA)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Government Enforcement Partner</td>
+              <td class="p-3 text-slate-600 text-xs">Conducts maritime patrol and interdiction operations in the Hermandad Reserve; operates overhauled patrol craft.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Local and International Suppliers</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Contractors</td>
+              <td class="p-3 text-slate-600 text-xs">Provide specialized shipyard repairs, oceanic buoys, naval engine components, and personal protective equipment.</td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: BRECHAS & RIESGOS ==================== -->
+    <div id="tab-brechas" class="tab-content space-y-6 hidden">
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-amber-900 uppercase">Diagnóstico Factual de Brechas y Control Interno</h3>
+          <p class="text-sm text-amber-800 mt-1">Se han tipificado los siguientes riesgos operativos, tecnológicos y documentales a partir de los archivos de trabajo reales de la organización.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-amber-900 uppercase">Factual Assessment of Gaps and Internal Control</h3>
+          <p class="text-sm text-amber-800 mt-1">The following operational, technological, and document management risks were identified from actual working files.</p>
+        </div>
+      </div>
+      <div class="lang-es grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severidad: Alta
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Brecha de Software</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Ausencia de Sistema Integrado de Adquisiciones y Contratos (Compras)</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Las compras operativas (carenamiento, repuestos, boyas) se gestionan en hojas de cálculo y documentos de texto independientes sin trazabilidad de orden de compra a factura.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-red-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
+                  Severidad: Muy Alta
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Riesgo Financiero / Operativo</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Gestión Presupuestaria Millonaria Confiada a Hojas de Cálculo</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">La ejecución presupuestaria de proyectos de gobierno depende de hojas de Excel complejas que carecen de controles transaccionales de bloqueo, auditoría y respaldo automatizado.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severidad: Alta
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Brecha de Gestión de Activos</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Falta de Expediente Digital de Mantenimiento Naval y Activos</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">No se cuenta con una ficha técnica histórica digitalizada por embarcación patrullera que registre repotenciaciones, piezas reemplazadas, garantías y horas de motor.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-blue-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+                  Severidad: Media
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Brecha Operativa</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Proceso de Rendición DPNG Manual y Redundante</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El personal técnico dedica semanas trimestrales a transcribir datos de facturas y retenciones en el Excel multipestaña de la DPNG.</p>
+            </div>
+            
+      </div>
+      <div class="lang-en grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severity: High
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Software Gap</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Absence of an Integrated Procurement & Contract System</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Operational procurement (vessel repairs, parts, buoys) is handled via disconnected spreadsheets and text documents without purchase-order-to-invoice tracing.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-red-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
+                  Severity: Very High
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Financial / Operational Risk</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Multi-Million Dollar Budget Managed in Spreadsheets</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Government project budgets rely on complex Excel workbooks lacking transactional concurrency controls, audit trails, and automated backups.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severity: High
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Asset Management Gap</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Lack of a Digital Maintenance Dossier per Patrol Vessel</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">No centralized digital service log exists per patrol boat to track shipyard history, replaced parts, warranties, and engine operational hours.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-blue-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+                  Severity: Medium
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Operational Inefficiency</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Manual and Redundant DPNG Reporting Process</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Technical staff spend weeks each quarter manually transcribing invoice and tax withholding data into the 8-sheet DPNG Excel workbook.</p>
+            </div>
+            
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: PROCEDIMIENTOS (SOPS) ==================== -->
+    <div id="tab-sops" class="tab-content space-y-6 hidden">
+      <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">Catálogo de Procedimientos Operativos Estándar (SOPs) Recomendados</h3>
+          <p class="text-sm text-emerald-800 mt-1">Paquete técnico estructurado para formalizar los procesos del área, eliminar la discrecionalidad y garantizar trazabilidad auditable ante el Directorio y Donantes.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">Recommended Standard Operating Procedures (SOPs) Catalog</h3>
+          <p class="text-sm text-emerald-800 mt-1">Structured technical suite to formalize processes, eliminate individual discretion, and guarantee auditable traceability.</p>
+        </div>
+      </div>
+      <div class="lang-es grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-01
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento de Planificación y Reformas Presupuestarias de Proyectos GoE</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Regular la formulación, aprobación y registro de reformas al plan de compras operativas de gobierno.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-02
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento de Adquisición de Bienes y Servicios Navales y Operativos</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Estandarizar la emisión de TDRs, cotizaciones en base de proveedores, screening KYC y adjudicación de contratos.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-03
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento de Fiscalización Técnica y Suscripción de Actas de Entrega-Recepción</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Normar la verificación física en astillero/campo de bienes y trabajos recibidos de contratistas.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-04
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento de Consolidación y Rendición Trimestral GLF - DPNG / Armada</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Estructurar la articulación técnica y financiera para el cierre y reporte formal de gastos interinstitucionales.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+      </div>
+      <div class="lang-en grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-01
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for Government Project Planning & Budget Reallocations</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Govern the formulation, approval, and recording of adjustments to government procurement plans.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-02
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for Naval & Operational Goods/Services Procurement</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Standardize TOR issuance, vendor sourcing, KYC screening, and contract awards for conservation.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-03
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for Field Supervision & Delivery-Reception Sign-Off</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Standardize on-site inspection protocols in shipyards and field areas for contractor deliverables.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CONS-04
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for GLF - DPNG / Navy Quarterly Financial Reporting</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Structure inter-institutional financial and technical reconciliation for official reporting.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: TRANSFORMACION DIGITAL ==================== -->
+    <div id="tab-tech" class="tab-content space-y-6 hidden">
+      <div class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-teal-900 uppercase">Arquitectura TO-BE y Modernización Tecnológica con Software e IA</h3>
+          <p class="text-sm text-teal-800 mt-1 leading-relaxed">Módulo ERP/Gestión de Proyectos de Gobierno y Activos Navales con control presupuestario transaccional y expedientes de adquisiciones.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-teal-900 uppercase">TO-BE Architecture and Technology Modernization with AI</h3>
+          <p class="text-sm text-teal-800 mt-1 leading-relaxed">Public Projects ERP Module and Naval Asset Management System with live budget controls and procurement dossiers.</p>
+        </div>
+      </div>
+      <div class="lang-es grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Módulo de Control Presupuestario de Proyectos de Gobierno</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Base de datos transaccional que sustituya el Excel de gobierno, con control en tiempo real de presupuesto asignado, comprometido y devengado.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Portal de Proveedores y Catálogo de Adquisiciones</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Base digitalizada de proveedores calificados de Galápagos y Ecuador continental con registro de cotizaciones, evaluaciones de desempeño y alertas KYC.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Expediente Digital de Embarcaciones y Activos Navales</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Hoja de vida digital por nave patrullera con bitácora de mantenimientos, órdenes de carenamiento, repuestos instalados y vigencia de pólizas.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Automatización de Reportes Financieros GLF-DPNG</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Generación automática del formato trimestral de rendición a partir del registro contable de pagos y facturas, eliminando la digitación manual.</p>
+            </div>
+            
+      </div>
+      <div class="lang-en grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Government Projects Transactional Budget Module</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Database-driven system replacing Excel, providing live visibility of allocated, committed, and disbursed funds per government agreement.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Supplier Portal & Procurement Catalog</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Digitalized vendor registry for Galapagos and mainland Ecuador with quote logging, performance scoring, and automatic compliance alerts.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Patrol Vessel Digital Service Dossier</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Digital lifecycle passport per patrol craft logging careening history, installed parts, warranties, and maintenance schedules.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Automated DPNG Financial Report Generator</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Automatic compilation of the quarterly report from accounting data, eliminating repetitive manual data entry.</p>
+            </div>
+            
+      </div>
+    </div>
+
+    
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600');
+      });
+      const target = document.getElementById(tabId);
+      if (target) target.classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600');
+        activeBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+      }
+    }
+  </script>
+</body>
+</html>

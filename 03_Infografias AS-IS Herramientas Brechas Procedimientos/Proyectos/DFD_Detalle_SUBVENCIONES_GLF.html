@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DFD Detalle (Level 1): Área de Proyectos y Convocatorias | GLF</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Bilingual CSS Engine */
+    body.lang-es .lang-en { display: none !important; }
+    body.lang-en .lang-es { display: none !important; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; padding: 0 !important; }
+    }
+    .node-hover:hover { filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); cursor: pointer; }
+  </style>
+  <script>
+    function getInitialLanguage() {
+      try {
+        const p = new URLSearchParams(window.location.search).get('lang');
+        if (p === 'es' || p === 'en') return p;
+        const s = localStorage.getItem('glf_lang');
+        if (s === 'es' || s === 'en') return s;
+      } catch (e) {}
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      return navLang.startsWith('en') ? 'en' : 'es';
+    }
+
+    let currentLang = getInitialLanguage();
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.body.classList.remove('lang-es', 'lang-en');
+      document.body.classList.add('lang-' + lang);
+      try { localStorage.setItem('glf_lang', lang); } catch (e) {}
+
+      document.querySelectorAll('.btn-lang-es').forEach(btn => {
+        if (lang === 'es') {
+          btn.classList.add('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.remove('text-white/80');
+        } else {
+          btn.classList.remove('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.add('text-white/80');
+        }
+      });
+      document.querySelectorAll('.btn-lang-en').forEach(btn => {
+        if (lang === 'en') {
+          btn.classList.add('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.remove('text-white/80');
+        } else {
+          btn.classList.remove('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.add('text-white/80');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setLanguage(currentLang);
+    });
+  </script>
+</head>
+<body class="lang-es bg-slate-50 text-slate-800 p-4 md:p-8 font-sans">
+  <div class="max-w-7xl mx-auto space-y-6">
+    
+    <!-- HEADER BILINGÜE -->
+    <div class="bg-gradient-to-r from-teal-900 via-emerald-800 to-cyan-900 text-white rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-2 flex-wrap">
+          <span class="bg-emerald-500/30 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/40">Galápagos Life Fund</span>
+          <span class="bg-cyan-500/30 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-400/40">
+            <span class="lang-es">Diagrama de Flujo de Datos (DFD)</span>
+            <span class="lang-en">Data Flow Diagram (DFD)</span>
+          </span>
+          <span class="bg-indigo-400/20 text-indigo-200 text-xs font-bold px-3 py-1 rounded-full border border-indigo-300/40">
+            <span class="lang-es">Nivel 1: Detalle</span>
+            <span class="lang-en">Level 1: Detail</span>
+          </span>
+          <span class="bg-emerald-400/20 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full">
+            <span class="lang-es">Borrador V1</span>
+            <span class="lang-en">Draft V1</span>
+          </span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-black">
+          <span class="lang-es">Área de Proyectos y Convocatorias</span>
+          <span class="lang-en">Projects and Grant Calls Department</span>
+        </h1>
+        <p class="text-emerald-100 text-sm mt-1 max-w-3xl">
+          <span class="lang-es">Desglose secuencial de subprocesos operativos, flujos de enlace, almacenes documentales y compuertas de control interno.</span>
+          <span class="lang-en">Decomposition of operational subprocesses, sequence flows, data stores, and internal control checkpoints.</span>
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-end gap-3 shrink-0">
+        <!-- BILINGUAL INSTANT SWITCHER BUTTON -->
+        <div class="no-print inline-flex items-center rounded-lg bg-black/30 p-1 border border-white/20 backdrop-blur-sm shadow-inner">
+          <button type="button" onclick="setLanguage('es')" class="btn-lang-es px-3 py-1 text-xs rounded transition font-semibold bg-white text-emerald-950 font-bold shadow-sm">ES</button>
+          <button type="button" onclick="setLanguage('en')" class="btn-lang-en px-3 py-1 text-xs rounded transition font-semibold text-white/80 hover:text-white">EN</button>
+        </div>
+
+        <button onclick="window.print()" class="no-print bg-white/20 hover:bg-white/30 text-white text-xs font-semibold px-4 py-2 rounded-lg transition flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span class="lang-es">Imprimir / PDF</span>
+          <span class="lang-en">Print / PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- LEYENDA VISUAL NORMATIVA BILINGÜE -->
+    <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+      <h2 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+        <span class="lang-es">Leyenda Visual del Modelo DFD</span>
+        <span class="lang-en">Official Visual Legend - DFD Architecture</span>
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-xs">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-5 rounded bg-emerald-100 border-2 border-emerald-600"></div>
+          <span class="font-medium text-slate-700">
+            <span class="lang-es">Entidad Externa</span>
+            <span class="lang-en">External Entity</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-5 rounded bg-teal-600 text-white flex items-center justify-center font-bold text-[9px]">P 1.X</div>
+          <span class="font-medium text-slate-700">
+            <span class="lang-es">Subproceso</span>
+            <span class="lang-en">Subprocess</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-5 rounded-sm bg-indigo-100 border border-indigo-600 flex items-center justify-center font-mono text-[9px] text-indigo-800">D1</div>
+          <span class="font-medium text-slate-700">
+            <span class="lang-es">Almacén de Datos</span>
+            <span class="lang-en">Data Store</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-5 rotate-45 bg-amber-100 border border-amber-600"></div>
+          <span class="font-medium text-slate-700">
+            <span class="lang-es">Aprobación / Control</span>
+            <span class="lang-en">Control / Approval</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-5 rounded border-2 border-red-500 border-dashed bg-red-50"></div>
+          <span class="font-medium text-red-700 font-bold">
+            <span class="lang-es">Punto Crítico / Brecha</span>
+            <span class="lang-en">Critical Gap / Risk</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-5 rounded border-2 border-amber-400 border-dotted bg-amber-50"></div>
+          <span class="font-medium text-amber-700">
+            <span class="lang-es">Pendiente Validar</span>
+            <span class="lang-en">Pending Validation</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIENZO SVG DFD DETALLE BILINGÜE -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm overflow-x-auto">
+      <div class="min-w-[960px]">
+        <svg viewBox="0 0 1000 740" class="w-full h-auto">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#0E7490" />
+            </marker>
+            <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+              <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.1"/>
+            </filter>
+          </defs>
+
+          <!-- Side External/Control Checkpoints -->
+          
+        <!-- CONTROL PC-1 -->
+        <g class="node-hover" transform="translate(40, 65)">
+          <rect width="160" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" filter="url(#shadow)"/>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">PUNTO DE CONTROL 1</text>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">CONTROL GATE 1</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-es">PC-1</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-en">PC-1</text>
+        </g>
+        <line x1="200" y1="90" x2="260" y2="90" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- CONTROL PC-2 -->
+        <g class="node-hover" transform="translate(40, 170)">
+          <rect width="160" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" filter="url(#shadow)"/>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">PUNTO DE CONTROL 2</text>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">CONTROL GATE 2</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-es">PC-2</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-en">PC-2</text>
+        </g>
+        <line x1="200" y1="195" x2="260" y2="195" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- CONTROL PC-3 -->
+        <g class="node-hover" transform="translate(40, 275)">
+          <rect width="160" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" filter="url(#shadow)"/>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">PUNTO DE CONTROL 3</text>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">CONTROL GATE 3</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-es">PC-3</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-en">PC-3</text>
+        </g>
+        <line x1="200" y1="300" x2="260" y2="300" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- CONTROL PC-4 -->
+        <g class="node-hover" transform="translate(40, 380)">
+          <rect width="160" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" filter="url(#shadow)"/>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">PUNTO DE CONTROL 4</text>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">CONTROL GATE 4</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-es">PC-4</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-en">PC-4</text>
+        </g>
+        <line x1="200" y1="405" x2="260" y2="405" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- CONTROL PC-5 -->
+        <g class="node-hover" transform="translate(40, 485)">
+          <rect width="160" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" filter="url(#shadow)"/>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">PUNTO DE CONTROL 5</text>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">CONTROL GATE 5</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-es">PC-5</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-en">PC-5</text>
+        </g>
+        <line x1="200" y1="510" x2="260" y2="510" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- CONTROL PC-6 -->
+        <g class="node-hover" transform="translate(40, 590)">
+          <rect width="160" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" filter="url(#shadow)"/>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">PUNTO DE CONTROL 6</text>
+          <text x="80" y="20" fill="#92400E" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">CONTROL GATE 6</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-es">PC-6</text>
+          <text x="80" y="36" fill="#78350F" font-size="8" text-anchor="middle" font-family="sans-serif" class="lang-en">PC-6</text>
+        </g>
+        <line x1="200" y1="615" x2="260" y2="615" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+
+          <!-- Central Sequential Processes -->
+          
+        <!-- PROCESO P1.0 -->
+        <g class="node-hover" transform="translate(260, 50)">
+          <rect width="320" height="75" rx="10" fill="#0F766E" filter="url(#shadow)" stroke="#115E59" stroke-width="1.5"/>
+          <rect width="320" height="22" rx="10" fill="#134E4A"/>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">P1.0 - ACTIVIDAD OPERATIVA</text>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">P1.0 - OPERATIONAL ACTIVITY</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">Publicar Convocatoria y Recepción d</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">Publish Call Guidelines & Receive C</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-es">Lanzamiento en web y recepción de postulacion...</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-en">Web launch and application intake via institu...</text>
+        </g>
+        
+            <line x1="420" y1="125" x2="420" y2="155" stroke="#0E7490" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <text x="430" y="143" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-es">Pasa a</text>
+            <text x="430" y="143" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-en">Passes to</text>
+            
+        <!-- PROCESO P2.0 -->
+        <g class="node-hover" transform="translate(260, 155)">
+          <rect width="320" height="75" rx="10" fill="#0F766E" filter="url(#shadow)" stroke="#115E59" stroke-width="1.5"/>
+          <rect width="320" height="22" rx="10" fill="#134E4A"/>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">P2.0 - ACTIVIDAD OPERATIVA</text>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">P2.0 - OPERATIONAL ACTIVITY</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">Verificar Cumplimiento Administrati</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">Verify Administrative Compliance</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-es">Revisión de requisitos mínimos en Ficha Admin...</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-en">Eligibility checklist verification against mi...</text>
+        </g>
+        
+            <line x1="420" y1="230" x2="420" y2="260" stroke="#0E7490" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <text x="430" y="248" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-es">Pasa a</text>
+            <text x="430" y="248" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-en">Passes to</text>
+            
+        <!-- PROCESO P3.0 -->
+        <g class="node-hover" transform="translate(260, 260)">
+          <rect width="320" height="75" rx="10" fill="#0F766E" filter="url(#shadow)" stroke="#115E59" stroke-width="1.5"/>
+          <rect width="320" height="22" rx="10" fill="#134E4A"/>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">P3.0 - ACTIVIDAD OPERATIVA</text>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">P3.0 - OPERATIONAL ACTIVITY</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">Evaluar y Preseleccionar en Comité </text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">CAT Peer Review & Preselection</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-es">Evaluación técnica individual (umbral 25/50) ...</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-en">Individual grading (25/50 threshold) and scor...</text>
+        </g>
+        
+            <line x1="420" y1="335" x2="420" y2="365" stroke="#0E7490" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <text x="430" y="353" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-es">Pasa a</text>
+            <text x="430" y="353" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-en">Passes to</text>
+            
+        <!-- PROCESO P4.0 -->
+        <g class="node-hover" transform="translate(260, 365)">
+          <rect width="320" height="75" rx="10" fill="#0F766E" filter="url(#shadow)" stroke="#115E59" stroke-width="1.5"/>
+          <rect width="320" height="22" rx="10" fill="#134E4A"/>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">P4.0 - ACTIVIDAD OPERATIVA</text>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">P4.0 - OPERATIONAL ACTIVITY</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">Evaluar Propuestas Completas y Salv</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">Evaluate Full Proposals & Safeguard</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-es">Calificación técnica a 100 pts y filtro VEAS ...</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-en">100-point technical grading and Sustainabilit...</text>
+        </g>
+        
+            <line x1="420" y1="440" x2="420" y2="470" stroke="#0E7490" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <text x="430" y="458" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-es">Pasa a</text>
+            <text x="430" y="458" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-en">Passes to</text>
+            
+        <!-- PROCESO P5.0 -->
+        <g class="node-hover" transform="translate(260, 470)">
+          <rect width="320" height="75" rx="10" fill="#0F766E" filter="url(#shadow)" stroke="#115E59" stroke-width="1.5"/>
+          <rect width="320" height="22" rx="10" fill="#134E4A"/>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">P5.0 - ACTIVIDAD OPERATIVA</text>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">P5.0 - OPERATIONAL ACTIVITY</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">Gestionar Adjudicación y Formalizac</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">Manage Board Adjudication & Contrac</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-es">Resolución de Junta, Due Diligence KYC y susc...</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-en">Board resolution, KYC Due Diligence, and agre...</text>
+        </g>
+        
+            <line x1="420" y1="545" x2="420" y2="575" stroke="#0E7490" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <text x="430" y="563" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-es">Pasa a</text>
+            <text x="430" y="563" fill="#0E7490" font-size="8" font-family="sans-serif" class="lang-en">Passes to</text>
+            
+        <!-- PROCESO P6.0 -->
+        <g class="node-hover" transform="translate(260, 575)">
+          <rect width="320" height="75" rx="10" fill="#0F766E" filter="url(#shadow)" stroke="#115E59" stroke-width="1.5"/>
+          <rect width="320" height="22" rx="10" fill="#134E4A"/>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">P6.0 - ACTIVIDAD OPERATIVA</text>
+          <text x="160" y="16" fill="#CCFBF1" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">P6.0 - OPERATIONAL ACTIVITY</text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">Monitorear Informes, Desembolsos y </text>
+          <text x="160" y="44" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">Monitor Reports, Tranches & Project</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-es">Seguimiento trimestral, regla 3/3, auditoría ...</text>
+          <text x="160" y="62" fill="#E2E8F0" font-size="9.5" text-anchor="middle" font-family="sans-serif" class="lang-en">Quarterly tracking, 3/3 rule sign-off, Clause...</text>
+        </g>
+        
+
+          <!-- Side Master Data Stores -->
+          
+        <!-- STORE D1 -->
+        <g class="node-hover" transform="translate(680, 80)">
+          <path d="M 0 12 C 0 4, 180 4, 180 12 L 180 50 C 180 58, 0 58, 0 50 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <ellipse cx="90" cy="12" rx="90" ry="8" fill="#E0E7FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">D1: REPOSITORIO</text>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">D1: REPOSITORY</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-es">D1: Convocatorias y Post</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-en">D1: Calls & Submissions</text>
+        </g>
+        <path d="M 580 110 L 680 110" fill="none" stroke="#4F46E5" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- STORE D2 -->
+        <g class="node-hover" transform="translate(680, 220)">
+          <path d="M 0 12 C 0 4, 180 4, 180 12 L 180 50 C 180 58, 0 58, 0 50 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <ellipse cx="90" cy="12" rx="90" ry="8" fill="#E0E7FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">D2: REPOSITORIO</text>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">D2: REPOSITORY</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-es">D2: Matriz Maestra Excel</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-en">D2: Master CAT Excel Mat</text>
+        </g>
+        <path d="M 580 250 L 680 250" fill="none" stroke="#4F46E5" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- STORE D3 -->
+        <g class="node-hover" transform="translate(680, 360)">
+          <path d="M 0 12 C 0 4, 180 4, 180 12 L 180 50 C 180 58, 0 58, 0 50 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <ellipse cx="90" cy="12" rx="90" ry="8" fill="#E0E7FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">D3: REPOSITORIO</text>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">D3: REPOSITORY</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-es">D3: Expediente Legal y P</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-en">D3: Legal Dossiers & ESM</text>
+        </g>
+        <path d="M 580 390 L 680 390" fill="none" stroke="#4F46E5" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+        <!-- STORE D4 -->
+        <g class="node-hover" transform="translate(680, 500)">
+          <path d="M 0 12 C 0 4, 180 4, 180 12 L 180 50 C 180 58, 0 58, 0 50 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <ellipse cx="90" cy="12" rx="90" ry="8" fill="#E0E7FF" stroke="#4F46E5" stroke-width="1.5"/>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-es">D4: REPOSITORIO</text>
+          <text x="90" y="32" fill="#3730A3" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif" class="lang-en">D4: REPOSITORY</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-es">D4: Control de Desembols</text>
+          <text x="90" y="46" fill="#4338CA" font-size="8.5" text-anchor="middle" font-family="sans-serif" class="lang-en">D4: Tranches & Settlemen</text>
+        </g>
+        <path d="M 580 530 L 680 530" fill="none" stroke="#4F46E5" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow)"/>
+        
+
+        </svg>
+      </div>
+    </div>
+
+    <!-- DETALLE OPERATIVO DE SUBPROCESOS (BILINGÜE) -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+      <h2 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <span class="w-6 h-6 rounded bg-teal-100 text-teal-800 text-xs font-bold flex items-center justify-center">P</span>
+        <span class="lang-es">Subprocesos Operativos (6 Fases)</span>
+        <span class="lang-en">Operational Subprocesses (6 Phases)</span>
+      </h2>
+      <div class="lang-es grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P1.0</span>
+            <span class="text-xs text-slate-400 font-medium">Subproceso Operativo</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Publicar Convocatoria y Recepción de Notas Conceptuales</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Lanzamiento en web y recepción de postulaciones por correo.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Almacén Conectado: D1</span>
+            <span class="text-emerald-700 font-semibold">Trazabilidad Requerida</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P2.0</span>
+            <span class="text-xs text-slate-400 font-medium">Subproceso Operativo</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Verificar Cumplimiento Administrativo</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Revisión de requisitos mínimos en Ficha Administrativa.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Almacén Conectado: D2</span>
+            <span class="text-emerald-700 font-semibold">Trazabilidad Requerida</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P3.0</span>
+            <span class="text-xs text-slate-400 font-medium">Subproceso Operativo</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Evaluar y Preseleccionar en Comité CAT</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Evaluación técnica individual (umbral 25/50) y consolidación de notas.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Almacén Conectado: D3</span>
+            <span class="text-emerald-700 font-semibold">Trazabilidad Requerida</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P4.0</span>
+            <span class="text-xs text-slate-400 font-medium">Subproceso Operativo</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Evaluar Propuestas Completas y Salvaguardas</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Calificación técnica a 100 pts y filtro VEAS por Sostenibilidad.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Almacén Conectado: D4</span>
+            <span class="text-emerald-700 font-semibold">Trazabilidad Requerida</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P5.0</span>
+            <span class="text-xs text-slate-400 font-medium">Subproceso Operativo</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Gestionar Adjudicación y Formalización Legal</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Resolución de Junta, Due Diligence KYC y suscripción de contrato.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Almacén Conectado: D1</span>
+            <span class="text-emerald-700 font-semibold">Trazabilidad Requerida</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P6.0</span>
+            <span class="text-xs text-slate-400 font-medium">Subproceso Operativo</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Monitorear Informes, Desembolsos y Finiquito</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Seguimiento trimestral, regla 3/3, auditoría cl. 9.11 y acta de finiquito.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Almacén Conectado: D1</span>
+            <span class="text-emerald-700 font-semibold">Trazabilidad Requerida</span>
+          </div>
+        </div>
+        
+      </div>
+      <div class="lang-en grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P1.0</span>
+            <span class="text-xs text-slate-400 font-medium">Operational Subprocess</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Publish Call Guidelines & Receive Concept Notes</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Web launch and application intake via institutional email.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Connected Data Store: D1</span>
+            <span class="text-emerald-700 font-semibold">Traceability Mandated</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P2.0</span>
+            <span class="text-xs text-slate-400 font-medium">Operational Subprocess</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Verify Administrative Compliance</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Eligibility checklist verification against minimum criteria.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Connected Data Store: D2</span>
+            <span class="text-emerald-700 font-semibold">Traceability Mandated</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P3.0</span>
+            <span class="text-xs text-slate-400 font-medium">Operational Subprocess</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">CAT Peer Review & Preselection</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Individual grading (25/50 threshold) and score consolidation.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Connected Data Store: D3</span>
+            <span class="text-emerald-700 font-semibold">Traceability Mandated</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P4.0</span>
+            <span class="text-xs text-slate-400 font-medium">Operational Subprocess</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Evaluate Full Proposals & Safeguards</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">100-point technical grading and Sustainability VEAS screening.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Connected Data Store: D4</span>
+            <span class="text-emerald-700 font-semibold">Traceability Mandated</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P5.0</span>
+            <span class="text-xs text-slate-400 font-medium">Operational Subprocess</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Manage Board Adjudication & Contract Signing</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Board resolution, KYC Due Diligence, and agreement execution.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Connected Data Store: D1</span>
+            <span class="text-emerald-700 font-semibold">Traceability Mandated</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded">P6.0</span>
+            <span class="text-xs text-slate-400 font-medium">Operational Subprocess</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900">Monitor Reports, Tranches & Project Settlement</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Quarterly tracking, 3/3 rule sign-off, Clause 9.11 audit, and settlement.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Connected Data Store: D1</span>
+            <span class="text-emerald-700 font-semibold">Traceability Mandated</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- PUNTOS DE CONTROL Y BRECHAS (BILINGÜE) -->
+    <div class="lang-es grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+        <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <span class="w-6 h-6 rounded bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center">PC</span>
+          Puntos de Control Interno (PC)
+        </h3>
+        <ul class="space-y-2">
+          <li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">1</span>PC-1: Filtro Knock-out de Nota Conceptual</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">2</span>PC-2: Umbral CAT 25/50</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">3</span>PC-3: Dictamen Favorable VEAS</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">4</span>PC-4: Resolución de Directorio</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">5</span>PC-5: Informe Due Diligence KYC</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">6</span>PC-6: Visto Bueno Tripartito 3/3</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+        <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <span class="w-6 h-6 rounded bg-red-100 text-red-800 text-xs font-bold flex items-center justify-center">PB</span>
+          Puntos de Brecha y Riesgo (PB)
+        </h3>
+        <ul class="space-y-2">
+          <li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">1</span>PB-1: Recepción por correo no estructurado</li><li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">2</span>PB-2: Tabulación manual de fórmulas Excel</li><li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">3</span>PB-3: Dispersión de expedientes contractuales</li><li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">4</span>PB-4: Verificación manual de bienes y activos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lang-en grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+        <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <span class="w-6 h-6 rounded bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center">PC</span>
+          Internal Control Gates (PC)
+        </h3>
+        <ul class="space-y-2">
+          <li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">1</span>PC-1: Concept Note Knock-out Filter</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">2</span>PC-2: CAT 25/50 Minimum Passing Score</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">3</span>PC-3: Favorable VEAS Safeguards Clearance</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">4</span>PC-4: Official Board Award Resolution</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">5</span>PC-5: Approved KYC Due Diligence</li><li class="text-xs text-amber-900 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">6</span>PC-6: Tripartite 3/3 Sign-off Desk</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+        <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <span class="w-6 h-6 rounded bg-red-100 text-red-800 text-xs font-bold flex items-center justify-center">PB</span>
+          Operational Gaps & Vulnerabilities (PB)
+        </h3>
+        <ul class="space-y-2">
+          <li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">1</span>PB-1: Unstructured email intake channel</li><li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">2</span>PB-2: Manual consolidation of Excel formulas</li><li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">3</span>PB-3: Dispersed contractual repositories</li><li class="text-xs text-red-900 bg-red-50 p-2.5 rounded-lg border border-red-200 flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-red-200 text-red-800 font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">4</span>PB-4: Manual tracking of physical project assets</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

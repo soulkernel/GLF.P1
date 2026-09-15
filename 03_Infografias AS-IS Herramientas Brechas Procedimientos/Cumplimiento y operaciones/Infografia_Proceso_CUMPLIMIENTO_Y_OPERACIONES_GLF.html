@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área de Cumplimiento y Operaciones | Galápagos Life Fund</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Bilingual CSS Engine: Only the active language is displayed */
+    body.lang-es .lang-en { display: none !important; }
+    body.lang-en .lang-es { display: none !important; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .tab-content { display: block !important; page-break-after: always; }
+    }
+  </style>
+  <script>
+    // Browser language detection with instant switcher (No redirection, single file)
+    function getInitialLanguage() {
+      try {
+        const urlParam = new URLSearchParams(window.location.search).get('lang');
+        if (urlParam === 'es' || urlParam === 'en') return urlParam;
+        const stored = localStorage.getItem('glf_lang');
+        if (stored === 'es' || stored === 'en') return stored;
+      } catch (e) {}
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      return navLang.startsWith('en') ? 'en' : 'es';
+    }
+
+    let currentLang = getInitialLanguage();
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.body.classList.remove('lang-es', 'lang-en');
+      document.body.classList.add('lang-' + lang);
+      try { localStorage.setItem('glf_lang', lang); } catch (e) {}
+
+      // Update button toggle states
+      document.querySelectorAll('.btn-lang-es').forEach(btn => {
+        if (lang === 'es') {
+          btn.classList.add('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.remove('text-white/80', 'text-slate-500');
+        } else {
+          btn.classList.remove('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.add('text-white/80');
+        }
+      });
+      document.querySelectorAll('.btn-lang-en').forEach(btn => {
+        if (lang === 'en') {
+          btn.classList.add('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.remove('text-white/80', 'text-slate-500');
+        } else {
+          btn.classList.remove('bg-white', 'text-emerald-950', 'font-bold', 'shadow-sm');
+          btn.classList.add('text-white/80');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setLanguage(currentLang);
+    });
+  </script>
+</head>
+<body class="lang-es bg-slate-50 text-slate-800 antialiased font-sans p-4 md:p-8">
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- HEADER / HERO BILINGÜE -->
+    <div class="bg-gradient-to-r from-emerald-900 via-teal-800 to-cyan-900 text-white rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+        <svg width="320" height="320" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span class="bg-emerald-500/30 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/40">
+              Galápagos Life Fund (GLF)
+            </span>
+            <span class="bg-cyan-500/30 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-400/40">
+              <span class="lang-es">Producto 1: Diagnóstico Institucional</span>
+              <span class="lang-en">Deliverable 1: Institutional AS-IS Diagnosis</span>
+            </span>
+            <span class="bg-amber-500/30 text-amber-200 text-xs font-semibold px-3 py-1 rounded-full border border-amber-400/40">
+              <span class="lang-es">Área de Cumplimiento y Operaciones</span>
+              <span class="lang-en">Compliance and Operations Department</span>
+            </span>
+            <span class="bg-emerald-400/20 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full border border-emerald-300/40">
+              <span class="lang-es">Borrador de diagnóstico V1</span>
+              <span class="lang-en">Diagnostic Draft V1</span>
+            </span>
+          </div>
+
+          <h1 class="text-2xl md:text-4xl font-black tracking-tight text-white">
+            <span class="lang-es">Área de Cumplimiento y Operaciones</span>
+            <span class="lang-en">Compliance and Operations Department</span>
+          </h1>
+
+          <p class="text-emerald-100 text-sm md:text-base mt-2 max-w-3xl leading-relaxed">
+            <span class="lang-es">Debida Diligencia (Due Diligence), Procedimiento Conozca su Contraparte/Cliente (KYC), Screening de Sanciones Internacionales y Prevención de Lavado de Activos (AML), y Control de Correspondencia Institucional Saliente. Diagnóstico factual AS-IS, mapeo de herramientas, catálogo de procedimientos estándar y arquitectura TO-BE.</span>
+            <span class="lang-en">Due Diligence, Know Your Customer/Counterparty (KYC), International Sanctions Screening, Anti-Money Laundering (AML), and Official Outgoing Correspondence Control. Factual AS-IS diagnosis, tools mapping, standard operating procedures catalog, and TO-BE architecture.</span>
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row md:flex-col items-end gap-2 shrink-0">
+          <!-- BILINGUAL INSTANT SWITCHER BUTTON -->
+          <div class="no-print inline-flex items-center rounded-lg bg-black/30 p-1 border border-white/20 backdrop-blur-sm shadow-inner">
+            <button type="button" onclick="setLanguage('es')" class="btn-lang-es px-3 py-1 text-xs rounded transition font-semibold bg-white text-emerald-950 font-bold shadow-sm">ES</button>
+            <button type="button" onclick="setLanguage('en')" class="btn-lang-en px-3 py-1 text-xs rounded transition font-semibold text-white/80 hover:text-white">EN</button>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/20 text-right w-full sm:w-auto">
+            <p class="text-xs text-emerald-200 font-medium">
+              <span class="lang-es">Responsables Oficiales GLF:</span>
+              <span class="lang-en">Official GLF Leads:</span>
+            </p>
+            <p class="text-sm font-bold text-white">
+              <span class="lang-es">Carolina Astudillo Farías (Oficial de Cumplimiento y Operaciones)</span>
+              <span class="lang-en">Carolina Astudillo Farías (Compliance and Operations Officer)</span>
+            </p>
+            <p class="text-xs text-slate-300">
+              <span class="lang-es">Área de Cumplimiento y Operaciones</span>
+              <span class="lang-en">Compliance and Operations Department</span>
+            </p>
+          </div>
+
+          <button onclick="window.print()" class="no-print bg-white/20 hover:bg-white/30 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            <span class="lang-es">Imprimir / Guardar PDF</span>
+            <span class="lang-en">Print / PDF</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS DE NAVEGACIÓN -->
+    <div class="no-print bg-white rounded-xl shadow-sm border border-slate-200 p-2 flex flex-wrap items-center justify-between gap-2 sticky top-2 z-50">
+      <div class="flex flex-wrap gap-2">
+        <button onclick="switchTab('tab-proceso')" id="btn-tab-proceso" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all bg-emerald-600 text-white shadow-sm">
+          <span class="lang-es">1. Proceso y Ciclo AS-IS</span>
+          <span class="lang-en">1. AS-IS Process & Cycle</span>
+        </button>
+        <button onclick="switchTab('tab-herramientas')" id="btn-tab-herramientas" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">2. Herramientas & Repositorios</span>
+          <span class="lang-en">2. Tools & Repositories</span>
+        </button>
+        <button onclick="switchTab('tab-brechas')" id="btn-tab-brechas" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">3. Brechas & Riesgos</span>
+          <span class="lang-en">3. Gaps & Risks</span>
+        </button>
+        <button onclick="switchTab('tab-sops')" id="btn-tab-sops" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">4. Procedimientos (SOPs)</span>
+          <span class="lang-en">4. Procedures (SOPs)</span>
+        </button>
+        <button onclick="switchTab('tab-tech')" id="btn-tab-tech" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+          <span class="lang-es">5. Transformación Digital con IA</span>
+          <span class="lang-en">5. Digital Transformation & AI</span>
+        </button>
+        
+      </div>
+
+      <!-- Compact Switcher in Navigation Bar -->
+      <div class="inline-flex items-center rounded-lg bg-slate-100 p-1 border border-slate-200 text-xs">
+        <button type="button" onclick="setLanguage('es')" class="btn-lang-es px-2 py-0.5 rounded transition">ES</button>
+        <button type="button" onclick="setLanguage('en')" class="btn-lang-en px-2 py-0.5 rounded transition">EN</button>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 1: PROCESO Y CICLO AS-IS ==================== -->
+    <div id="tab-proceso" class="tab-content space-y-6">
+      
+      <!-- KPI Cards (Bilingual) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">Nivel de Evidencia</span>
+            <span class="lang-en">Level of Evidence</span>
+          </p>
+          <p class="text-xl font-bold text-emerald-700 mt-1">
+            <span class="lang-es">Muy</span>
+            <span class="lang-en">Very</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Archivos Factuales GLF</span>
+            <span class="lang-en">GLF Factual Files</span>
+          </p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">Fases del Proceso</span>
+            <span class="lang-en">Process Phases</span>
+          </p>
+          <p class="text-xl font-bold text-cyan-700 mt-1">
+            <span class="lang-es">5 Fases</span>
+            <span class="lang-en">5 Phases</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Secuencia Cronológica</span>
+            <span class="lang-en">Chronological Order</span>
+          </p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">Brechas Críticas</span>
+            <span class="lang-en">Critical Gaps</span>
+          </p>
+          <p class="text-xl font-bold text-red-600 mt-1">
+            <span class="lang-es">4 Hallazgos</span>
+            <span class="lang-en">4 Findings</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Oportunidades de Mejora</span>
+            <span class="lang-en">Improvement Points</span>
+          </p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">
+            <span class="lang-es">SOPs a Formalizar</span>
+            <span class="lang-en">SOPs to Standardize</span>
+          </p>
+          <p class="text-xl font-bold text-amber-600 mt-1">
+            <span class="lang-es">4 Manuales</span>
+            <span class="lang-en">4 Manuals</span>
+          </p>
+          <p class="text-xs text-slate-600 mt-1">
+            <span class="lang-es">Estandarización Inmediata</span>
+            <span class="lang-en">Immediate Adoption</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Resumen Factual Box (Bilingual) -->
+      <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">Síntesis del Diagnóstico AS-IS</h3>
+          <p class="text-sm text-emerald-800 mt-1 leading-relaxed">El Área de Cumplimiento y Operaciones constituye la barrera de defensa institucional contra riesgos legales, financieros, de reputación y de lavado de activos. Su función abarca la debida diligencia de toda persona natural o jurídica que interactúe con el GLF: proponentes de subvenciones, consultores, proveedores de proyectos de gobierno (ej. repotenciación DIRNEA), miembros de la Junta Directiva y personal del staff. Ejecuta screenings manuales en listas de sanciones internacionales (OFAC, UE, UK, SECO, World-Check) y bases nacionales (Función Judicial, SRI, IESS). Asimismo, custodia el registro de correspondencia externa oficial. La principal brecha radica en la ejecución manual y atomizada del screening y la gestión de oficios en libros de Excel sin un sistema de gestión documental o radicación digital.</p>
+          <p class="text-xs text-emerald-700 mt-2 font-medium">Nota de Reserva: En estricto cumplimiento institucional, se ha excluido cualquier dato o monto presupuestario por tratarse de información confidencial.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">AS-IS Diagnosis Executive Summary</h3>
+          <p class="text-sm text-emerald-800 mt-1 leading-relaxed">The Compliance and Operations Department serves as the institutional shield against legal, financial, reputational, and anti-money laundering risks. Its scope encompasses vetting all individuals or legal entities engaging with GLF: grant proponents, technical consultants, contractors for government projects (e.g. Navy vessel overhauls), Board members, and core staff. It conducts manual screenings against international sanctions lists (OFAC, EU, UK, SECO, World-Check) and Ecuadorian public databases (Judiciary, Tax Service, Social Security). Furthermore, it logs official outbound letters. Key vulnerabilities stem from manual query execution across isolated websites and managing correspondence numbering in an Excel sheet without an automated digital dispatch registry.</p>
+          <p class="text-xs text-emerald-700 mt-2 font-medium">Confidentiality Note: In strict compliance with institutional guidelines, all budget data has been omitted as confidential.</p>
+        </div>
+      </div>
+
+      <!-- Cronología de Fases (Bilingual) -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+          <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-sm font-bold">1</span>
+          <span class="lang-es">Ciclo Cronológico de Ejecución (5 Fases Identificadas)</span>
+          <span class="lang-en">Chronological Execution Cycle (5 Identified Phases)</span>
+        </h2>
+        
+        <div class="lang-es relative border-l-2 border-emerald-500 ml-4 md:ml-6 pl-6 md:pl-8 space-y-8 my-6">
+          
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-cyan-600 border-4 border-white shadow"></div>
+              <div class="bg-cyan-50/50 border border-cyan-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-cyan-800 bg-cyan-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 1: Emisión y Recepción del Formulario KYC y Anexos
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Día 1 al 5</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Envío del formulario 'Conozca su Cliente GLF' al postulante, consultor o proveedor. Recepción por correo electrónico junto con los anexos habilitantes: cédula de identidad, certificado bancario, planilla de servicio básico (luz/agua), RUC y nombramiento de representante legal.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Formulario Conozca a su cliente GLF Optimizado V1.0.xlsx, documen...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Expediente digital KYC preliminar archivado en carpeta compartida...</span>
+                  <span class="bg-cyan-100 text-cyan-800 px-2 py-1 rounded font-semibold">Líder: Asistente Administrativa (Tannia Masaquiza) y Oficial de Cumplimiento</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-indigo-600 border-4 border-white shadow"></div>
+              <div class="bg-indigo-50/50 border border-indigo-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-indigo-800 bg-indigo-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 2: Verificación de Antecedentes Nacionales y Cumplimiento Tributario/Laboral
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Día 6 al 8</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Consulta individual en bases de datos públicas de Ecuador: Consulta de Procesos Judiciales (Consejo de la Judicatura / Función Judicial), Cumplimiento Tributario del SRI (verificación de RUC y deudas en firme) y Certificado de Obligaciones Patronales del IESS.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Número de RUC y cédula de los representantes legales y accionista...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Capturas de pantalla y certificados de no adeudar guardados en el...</span>
+                  <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Líder: Oficial de Cumplimiento y Operaciones (Carolina Astudillo Farías)</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-amber-600 border-4 border-white shadow"></div>
+              <div class="bg-amber-50/50 border border-amber-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 3: Screening Internacional de Sanciones y Monitoreo de Medios Adversos
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Día 9 al 12</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Búsqueda exhaustiva en motores internacionales: OFAC Sanctions Search, European Union Consolidated Financial Sanctions List, UK FCDO Sanctions, SECO Suiza, World-Check One / WorldCompliance. Búsqueda de Adverse Media en Google News, Bing News y Reuters.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Nombres completos de contrapartes, socios mayoritarios y directiv...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Reportes individuales de screening en PDF y registro en 'Screenin...</span>
+                  <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold">Líder: Oficial de Cumplimiento y Operaciones</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-purple-600 border-4 border-white shadow"></div>
+              <div class="bg-purple-50/50 border border-purple-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-purple-800 bg-purple-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 4: Análisis de Riesgo y Emisión del Informe de Debida Diligencia (Due Diligence)
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Día 13 al 15</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Consolidación de hallazgos en la plantilla del Informe de Due Diligence (modelo FUNCAVID). Valoración del nivel de riesgo (Bajo, Medio, Alto). Determinación de observaciones o condiciones precedentes a la contratación. Firma electrónica del informe por la Oficial de Cumplimiento.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Formularios KYC validados, reportes de screening, balances contab...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Informe_DD_[Contraparte]_signed.pdf debidamente legalizado....</span>
+                  <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded font-semibold">Líder: Oficial de Cumplimiento y Operaciones</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-rose-600 border-4 border-white shadow"></div>
+              <div class="bg-rose-50/50 border border-rose-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-rose-800 bg-rose-200/60 px-2.5 py-0.5 rounded-md">
+                    Fase 5: Asignación y Control de Oficios Institucionales Salientes
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Continuo / Según demanda</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Recepción de solicitudes de envío de oficios oficiales dirigidos a entidades públicas (CGREG, MAATE, Armada) u organizaciones aliadas (RedLAC). Asignación manual del código correlativo en 'OFICIOS Secuencia.xlsx'. Registro de destinatario y asunto. Archivo del oficio suscrito.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumos: Borradores de oficios generados por las áreas solicitantes....</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Salidas: Oficio institucional con código correlativo oficial y archivo en ...</span>
+                  <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded font-semibold">Líder: Asistente Administrativa (Tannia Masaquiza)</span>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+        <div class="lang-en relative border-l-2 border-emerald-500 ml-4 md:ml-6 pl-6 md:pl-8 space-y-8 my-6">
+          
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-cyan-600 border-4 border-white shadow"></div>
+              <div class="bg-cyan-50/50 border border-cyan-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-cyan-800 bg-cyan-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 1: KYC Form Issuance & Attachment Intake
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Day 1 to 5</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Sending the 'Know Your Customer GLF' form to applicants, consultants, or vendors. Receiving completed forms via email alongside supporting attachments: national ID/passport, bank account certification, utility bill, tax registration (RUC), and legal representation appointment.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Formulario Conozca a su cliente GLF Optimizado V1.0.xlsx, corpora...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Preliminary digital KYC dossier filed in shared drive....</span>
+                  <span class="bg-cyan-100 text-cyan-800 px-2 py-1 rounded font-semibold">Lead: Administrative Assistant (Tannia Masaquiza) & Compliance Officer</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-indigo-600 border-4 border-white shadow"></div>
+              <div class="bg-indigo-50/50 border border-indigo-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-indigo-800 bg-indigo-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 2: National Database & Tax/Labor Clearance Searches
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Day 6 to 8</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Individual queries in Ecuadorian public registries: Judicial Records (Judicial Council / Court Records), Tax Compliance (SRI tax standing), and Social Security employer compliance (IESS).</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Tax IDs (RUC) and national identity numbers of legal reps and maj...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Screenshots and clearance certificates archived in the dossier....</span>
+                  <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Lead: Compliance and Operations Officer (Carolina Astudillo Farías)</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-amber-600 border-4 border-white shadow"></div>
+              <div class="bg-amber-50/50 border border-amber-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 3: International Sanctions Screening & Adverse Media Search
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Day 9 to 12</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Thorough screening across international engines: OFAC Sanctions Search, EU Consolidated Financial Sanctions List, UK FCDO Sanctions, Swiss SECO, World-Check One / WorldCompliance. Adverse Media searches on Google News, Bing News, and Reuters.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Full legal names of counterparties, majority partners, and direct...</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Individual screening PDF search logs and entry into 'Screening GL...</span>
+                  <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold">Lead: Compliance and Operations Officer</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-purple-600 border-4 border-white shadow"></div>
+              <div class="bg-purple-50/50 border border-purple-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-purple-800 bg-purple-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 4: Risk Evaluation & Due Diligence Report Issuance
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Day 13 to 15</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Consolidating findings into the Due Diligence Report template (FUNCAVID model). Assessing risk levels (Low, Medium, High). Determining precedent conditions for contract execution. Digital signing of the report by the Compliance Officer.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Validated KYC forms, screening reports, financial statements....</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Legally executed Informe_DD_[Counterparty]_signed.pdf....</span>
+                  <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded font-semibold">Lead: Compliance and Operations Officer</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group">
+              <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-rose-600 border-4 border-white shadow"></div>
+              <div class="bg-rose-50/50 border border-rose-200 rounded-xl p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-rose-800 bg-rose-200/60 px-2.5 py-0.5 rounded-md">
+                    Phase 5: Official Outgoing Correspondence Numbering & Filing
+                  </span>
+                  <span class="text-xs font-medium text-slate-500">Continuous / On Demand</span>
+                </div>
+                <p class="text-sm text-slate-700 mt-2 leading-relaxed">Receiving requests to issue official correspondence addressed to government agencies (CGREG, MAATE, Navy) or regional partners (RedLAC). Manual sequential numbering in 'OFICIOS Secuencia.xlsx'. Logging recipient and subject. Archiving the signed PDF.</p>
+                <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Inputs: Draft correspondence submitted by requesting departments....</span>
+                  <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Outputs: Numbered official letter and archived signed copy....</span>
+                  <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded font-semibold">Lead: Administrative Assistant (Tannia Masaquiza)</span>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: HERRAMIENTAS & REPOSITORIOS ==================== -->
+    <div id="tab-herramientas" class="tab-content space-y-6 hidden">
+      
+      <!-- Fuentes Revisadas -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-base font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <span class="w-6 h-6 bg-teal-100 text-teal-800 rounded-md flex items-center justify-center text-xs font-bold">A</span>
+          <span class="lang-es">Inventario Exhaustivo de Archivos Fuente Revisados</span>
+          <span class="lang-en">Exhaustive Inventory of Reviewed Source Files</span>
+        </h2>
+        <div class="lang-es">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+            <li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Cumplimiento de las Normas contra el Blanqueo de Capitales y Sanciones Económicas Conozca los Procedimientos de su Contraparte.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Screening GLF .xlsx (hojas: Consultorías, Proceso repotenciación DIRNEA, Miembros del Board, STAFF GLF, Proyecto Gobierno)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Formulario Conozca a su cliente GLF.xlsx y Formulario Conozca su Cliente GLF Optimizado V1.0.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>OFICIOS Secuencia.xlsx (hojas: Sheet1, Nro actas Comité de quejas)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Listado de proveedores.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Listado Screnning Empresas Internacionales.docx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Informe_DD_Funcavid_signed.pdf (Expediente Due Diligence modelo)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Expediente FUNCAVID (Estatutos, RUC, Nombramiento, Balance 2025, Planilla luz, Proceso Judicial)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Gmail - Cumplimiento de formulario - Procedimiento KYC.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>STAFF GLF 2026.pdf</li>
+          </ul>
+        </div>
+        <div class="lang-en">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+            <li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Cumplimiento de las Normas contra el Blanqueo de Capitales y Sanciones Económicas Conozca los Procedimientos de su Contraparte.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Screening GLF .xlsx (Sheets: Consultancies, DIRNEA repowering, Board Members, Staff, Government Projects)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Formulario Conozca a su cliente GLF.xlsx & Formulario Conozca su Cliente GLF Optimizado V1.0.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>OFICIOS Secuencia.xlsx (Sheets: Sheet1, Grievance Committee Minutes)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Listado de proveedores.xlsx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Listado Screnning Empresas Internacionales.docx</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Informe_DD_Funcavid_signed.pdf (Model Due Diligence dossier)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>FUNCAVID Dossier (Bylaws, Tax RUC, Appointment, Balance Sheet, Utility Bill, Judicial Search)</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>Gmail - Cumplimiento de formulario - Procedimiento KYC.pdf</li><li class="text-xs text-slate-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>STAFF GLF 2026.pdf</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tabla de Herramientas -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-teal-100 text-teal-800 rounded-md flex items-center justify-center text-xs font-bold">B</span>
+          <span class="lang-es">Herramientas, Hojas de Cálculo y Repositorios Actuales</span>
+          <span class="lang-en">Current Tools, Spreadsheets and Data Stores</span>
+        </h2>
+        <div class="lang-es overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Herramienta / Archivo</th>
+                <th class="p-3">Tipo</th>
+                <th class="p-3">Uso Operativo</th>
+                <th class="p-3">Evaluación de Brecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Screening GLF .xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Libro Maestro de Screening</td>
+              <td class="p-3 text-slate-700 text-xs">Hojas especializadas para Consultorías, DIRNEA, Miembros del Board, Staff y Proyectos Gobierno.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Alta: Registro estático manual; no alerta automáticamente si una persona previamente aprobada entra a una lista de sanciones en el futuro.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Formulario Conozca su Cliente GLF (Excel)</td>
+              <td class="p-3 text-slate-500 text-xs">Formato de Captura de Datos</td>
+              <td class="p-3 text-slate-700 text-xs">Plantilla enviada a contrapartes para recopilación de datos legales, accionistas y cuentas bancarias.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Crítica: Envío y recepción por correo en formato Excel desprotegido; manipulación de datos sensibles sin cifrado de extremo a extremo.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">OFICIOS Secuencia.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Libro de Control de Correspondencia</td>
+              <td class="p-3 text-slate-700 text-xs">Control de códigos correlativos para oficios salientes institucionales.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Crítica: Registro manual sin control de concurrencia; ausencia de ventanilla única para correspondencia entrante y falta de registro de cargo de entrega.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Motores Web Externos de Búsqueda de Sanciones</td>
+              <td class="p-3 text-slate-500 text-xs">Herramientas de Consulta</td>
+              <td class="p-3 text-slate-700 text-xs">Portales web de OFAC, UE, SECO, FCDO y Función Judicial de Ecuador.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Alta: Búsqueda manual una por una, consumiendo horas de trabajo del oficial sin automatización API.</span></td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        <div class="lang-en overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Tool / File</th>
+                <th class="p-3">Type</th>
+                <th class="p-3">Operational Use</th>
+                <th class="p-3">Gap Evaluation</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Screening GLF .xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Master Screening Spreadsheet</td>
+              <td class="p-3 text-slate-700 text-xs">Contains dedicated sheets for Consultancies, DIRNEA, Board Members, Staff, and Government Projects.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">High: Static manual log; does not automatically notify if a previously approved vendor enters a sanctions list later.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Know Your Customer Form (Excel)</td>
+              <td class="p-3 text-slate-500 text-xs">Data Intake Template</td>
+              <td class="p-3 text-slate-700 text-xs">Sent to counterparties to capture legal, corporate, banking, and shareholder data.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Critical: Circulated via unencrypted email; handles sensitive personal and banking data without end-to-end encryption.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">OFICIOS Secuencia.xlsx</td>
+              <td class="p-3 text-slate-500 text-xs">Correspondence Numbering Book</td>
+              <td class="p-3 text-slate-700 text-xs">Manual sequential numbering for outbound official communications.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">Critical: Spreadsheet log without concurrency control; lack of incoming mail registry and absence of delivery-cargo custody.</span></td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">External Sanctions Web Portals</td>
+              <td class="p-3 text-slate-500 text-xs">Query Engines</td>
+              <td class="p-3 text-slate-700 text-xs">Portals for OFAC, EU, SECO, FCDO, and Ecuadorian Judiciary.</td>
+              <td class="p-3 text-xs"><span class="bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded font-medium">High: Manual one-by-one queries, consuming extensive staff time without automated API integrations.</span></td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tabla de Roles -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-teal-100 text-teal-800 rounded-md flex items-center justify-center text-xs font-bold">C</span>
+          <span class="lang-es">Mapeo de Roles y Responsabilidades</span>
+          <span class="lang-en">Roles and Functional Responsibilities Mapping</span>
+        </h2>
+        <div class="lang-es overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Rol / Cargo Oficial</th>
+                <th class="p-3">Nivel Funcional</th>
+                <th class="p-3">Atribuciones y Responsabilidades</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Oficial de Cumplimiento y Operaciones</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Responsable de Control Interno y AML</td>
+              <td class="p-3 text-slate-600 text-xs">Lidera la política de debida diligencia, ejecuta los screenings internacionales y nacionales, emite los dictámenes de Due Diligence y monitorea el cumplimiento normativo global.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Asistente Administrativa</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Gestión Operativa y Documental</td>
+              <td class="p-3 text-slate-600 text-xs">Gestiona la recepción de formularios KYC, asigna números correlativos en el libro de oficios, apoya en el archivo de anexos y logística de comunicaciones.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Contrapartes (Beneficiarios, Proveedores, Consultores)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Actores Evaluados</td>
+              <td class="p-3 text-slate-600 text-xs">Diligencian con carácter de declaración juramentada los formularios KYC y entregan soportes de identidad, bancarios y fiscales.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Miembros del Directorio y Staff GLF</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Sujetos a Monitoreo Interno</td>
+              <td class="p-3 text-slate-600 text-xs">Sometidos a screening periódico preventivo para resguardar la reputación institucional.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Organismos Reguladores y Listas de Sanciones</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Fuentes Externas de Verificación</td>
+              <td class="p-3 text-slate-600 text-xs">Bases de datos de consulta obligatoria (OFAC, ONU, UE, UK, SRI, Función Judicial, UAFE).</td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        <div class="lang-en overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                <th class="p-3">Official Role / Position</th>
+                <th class="p-3">Functional Level</th>
+                <th class="p-3">Attributions and Responsibilities</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Compliance and Operations Officer</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Internal Control & AML Lead</td>
+              <td class="p-3 text-slate-600 text-xs">Directs due diligence procedures, conducts sanctions screenings, executes Due Diligence clearance reports, and oversees regulatory compliance.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Administrative Assistant</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Operational & Document Support</td>
+              <td class="p-3 text-slate-600 text-xs">Collects KYC intake forms, assigns sequential numbers in the official correspondence log, and supports document filing.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Counterparties (Grantees, Vendors, Consultants)</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Vetted Stakeholders</td>
+              <td class="p-3 text-slate-600 text-xs">Complete sworn KYC declarations and provide identity, banking, and tax verifications.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Board Members & GLF Staff</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">Internal Oversight Subjects</td>
+              <td class="p-3 text-slate-600 text-xs">Subject to periodic preventative screening to safeguard institutional standing.</td>
+            </tr>
+            
+            <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+              <td class="p-3 font-semibold text-slate-800 text-sm">Regulatory Bodies & Sanctions Watchlists</td>
+              <td class="p-3 text-emerald-700 text-xs font-medium">External Verification Sources</td>
+              <td class="p-3 text-slate-600 text-xs">Mandatory query databases (OFAC, UN, EU, UK, SRI, Judiciary, UAFE).</td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: BRECHAS & RIESGOS ==================== -->
+    <div id="tab-brechas" class="tab-content space-y-6 hidden">
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-amber-900 uppercase">Diagnóstico Factual de Brechas y Control Interno</h3>
+          <p class="text-sm text-amber-800 mt-1">Se han tipificado los siguientes riesgos operativos, tecnológicos y documentales a partir de los archivos de trabajo reales de la organización.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-amber-900 uppercase">Factual Assessment of Gaps and Internal Control</h3>
+          <p class="text-sm text-amber-800 mt-1">The following operational, technological, and document management risks were identified from actual working files.</p>
+        </div>
+      </div>
+      <div class="lang-es grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severidad: Alta
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Brecha de Productividad y Cobertura</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Screening Manual y Disperso en Múltiples Portales Web</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">La verificación se ejecuta navegando manualmente en más de 6 páginas web independientes por cada persona, demandando excesivo tiempo y aumentando el riesgo de omisión.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severidad: Alta
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Riesgo de Cumplimiento AML</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Ausencia de Monitoreo Continuo Post-Contratación (Ongoing Monitoring)</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El screening se realiza una sola vez al inicio; no existe un sistema que re-evalúe automáticamente a las contrapartes si cambian de estatus durante la vigencia del contrato.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-red-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
+                  Severidad: Crítica
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Riesgo de Privacidad y Ciberseguridad</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Tratamiento Inseguro de Datos Personales y Documentación Sensible</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Cédulas de identidad, planillas residenciales, certificados bancarios y balances contables circulan como adjuntos de correo sin cifrado ni repositorio confidencial aislado.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severidad: Alta
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Brecha de Control Institucional</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Gestión de Correspondencia y Oficios Confiada a un Libro de Excel</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El registro de oficios en 'OFICIOS Secuencia.xlsx' no contempla correspondencia entrante, no genera acuses de recibo electrónicos ni garantiza la preservación de cargos firmados.</p>
+            </div>
+            
+      </div>
+      <div class="lang-en grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severity: High
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Productivity & Risk Gap</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Manual, Dispersed Screening across Multiple Web Portals</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Staff manually browse 6+ independent websites per counterparty, creating significant administrative burden and human omission risks.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severity: High
+                </span>
+                <span class="text-xs text-slate-400 font-mono">AML Compliance Risk</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Absence of Ongoing Post-Contract Monitoring</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Screening is performed only once at intake; no automated system flags active contractors if they are added to sanctions lists during contract lifecycles.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-red-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
+                  Severity: Critical
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Privacy & Cybersecurity Risk</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Unencrypted Handling of Confidential Personal & Banking Data</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">National IDs, utility bills, bank certificates, and financial balances circulate as email attachments without encryption or restricted vaults.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-amber-200 p-5 shadow-sm hover:shadow-md transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Severity: High
+                </span>
+                <span class="text-xs text-slate-400 font-mono">Institutional Control Gap</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mt-1">Correspondence and Letter Registry Managed in Excel</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">'OFICIOS Secuencia.xlsx' tracks only outbound letters, misses incoming correspondence, and provides no tracking of signed delivery receipts.</p>
+            </div>
+            
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: PROCEDIMIENTOS (SOPS) ==================== -->
+    <div id="tab-sops" class="tab-content space-y-6 hidden">
+      <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">Catálogo de Procedimientos Operativos Estándar (SOPs) Recomendados</h3>
+          <p class="text-sm text-emerald-800 mt-1">Paquete técnico estructurado para formalizar los procesos del área, eliminar la discrecionalidad y garantizar trazabilidad auditable ante el Directorio y Donantes.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase">Recommended Standard Operating Procedures (SOPs) Catalog</h3>
+          <p class="text-sm text-emerald-800 mt-1">Structured technical suite to formalize processes, eliminate individual discretion, and guarantee auditable traceability.</p>
+        </div>
+      </div>
+      <div class="lang-es grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-01
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento Operativo de Debida Diligencia (Due Diligence) y KYC</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Formalizar los requisitos documentales, tiempos de respuesta y criterios de evaluación de contrapartes.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-02
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento de Screening de Sanciones Internacionales y Prevención de Lavado de Activos</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Normar las fuentes obligatorias de consulta, tratamiento de falsos positivos y escalamiento de alertas de riesgo.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-03
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento de Monitoreo Periódico de Cumplimiento de Contratistas y Directorio</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Establecer la frecuencia y metodología de re-evaluación anual de proveedores, beneficiarios y órganos directivos.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-04
+                </span>
+                <span class="text-xs text-slate-500">Procedimiento a Formalizar</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Procedimiento de Gestión y Numeración de Correspondencia Oficial Saliente y Entrante</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Estandarizar el ciclo de emisión de oficios, codificación, radicación de correspondencia y custodia de cargos.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Estado: Propuesta V1</span>
+                <span class="text-emerald-600 font-semibold">Prioridad Inmediata</span>
+              </div>
+            </div>
+            
+      </div>
+      <div class="lang-en grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-01
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for Counterparty Due Diligence and KYC</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Formalize document requirements, turnaround timelines, and vetting criteria for all partners.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-02
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for Sanctions Screening and AML Risk Escalation</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Codify mandatory search sources, false-positive resolution, and risk escalation channels.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-03
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for Ongoing Compliance Monitoring of Contractors & Board</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Establish annual re-screening schedules and protocols for active suppliers and board members.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-500 transition">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
+                  SOP-CUMP-04
+                </span>
+                <span class="text-xs text-slate-500">Standard Operating Procedure</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Standard Procedure for Institutional Inbound & Outbound Correspondence Control</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">Standardize letter numbering, mail intake logging, electronic signatures, and cargo archiving.</p>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Status: Draft V1 Proposal</span>
+                <span class="text-emerald-600 font-semibold">Immediate Priority</span>
+              </div>
+            </div>
+            
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: TRANSFORMACION DIGITAL ==================== -->
+    <div id="tab-tech" class="tab-content space-y-6 hidden">
+      <div class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-xl">
+        <div class="lang-es">
+          <h3 class="text-sm font-bold text-teal-900 uppercase">Arquitectura TO-BE y Modernización Tecnológica con Software e IA</h3>
+          <p class="text-sm text-teal-800 mt-1 leading-relaxed">Plataforma Centralizada de Compliance con integración API a listas de sanciones, portal seguro KYC y sistema de correspondencia digital.</p>
+        </div>
+        <div class="lang-en">
+          <h3 class="text-sm font-bold text-teal-900 uppercase">TO-BE Architecture and Technology Modernization with AI</h3>
+          <p class="text-sm text-teal-800 mt-1 leading-relaxed">Centralized Compliance Platform with API integrations to sanctions watchlists, secure KYC portal, and digital correspondence system.</p>
+        </div>
+      </div>
+      <div class="lang-es grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Portal Seguro de Auto-Gestión KYC para Contrapartes</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Formulario web protegido con autenticación de doble factor y subida de archivos encriptados en reposo para salvaguardar datos confidenciales.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Motor Automatizado de Screening con API Multifuente</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Integración a proveedores de bases de datos de sanciones y PEPs (World-Check / LexisNexis / OpenSanctions) para barridos automáticos en segundos.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Módulo de Monitoreo Continuo y Alertas en Tiempo Real</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Sistema de escaneo nocturno recurrente de la cartera activa de contratistas que emite alertas si un sujeto ingresa a una lista restrictiva.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Módulo de Ventanilla Única y Correspondencia Digital (e-Oficios)</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Sistema web con numeración correlativa inmutable, firma electrónica integrada, trazabilidad de cargos y registro de correspondencia recibida.</p>
+            </div>
+            
+      </div>
+      <div class="lang-en grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Secure Counterparty Self-Service KYC Portal</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Web form with MFA authentication and encrypted document storage in transit and at rest for sensitive data.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Multi-Source Automated Sanctions Screening API</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Direct integration with global watchlist providers (World-Check / LexisNexis / OpenSanctions) for instant, automated background sweeps.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Ongoing Monitoring & Real-Time Alert Engine</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Daily automated scan of the active vendor and grantee portfolio, flagging changes in sanctions or adverse media status immediately.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-teal-500 transition">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg mb-3 border border-teal-200">
+                AI
+              </div>
+              <h3 class="text-base font-bold text-slate-900">Digital Dispatch & Inbound Registry Module (e-Oficios)</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Web system with tamper-proof sequential numbering, integrated digital signatures, cargo confirmation, and incoming correspondence intake.</p>
+            </div>
+            
+      </div>
+    </div>
+
+    
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600');
+      });
+      const target = document.getElementById(tabId);
+      if (target) target.classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600');
+        activeBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+      }
+    }
+  </script>
+</body>
+</html>

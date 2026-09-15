@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico y Transformación Digital: Salvaguardas Ambientales y Sociales (SGAS) | Galápagos Life Fund</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .tab-content { display: block !important; page-break-after: always; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans p-4 md:p-8">
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- HEADER / HERO -->
+    <div class="bg-gradient-to-r from-emerald-900 via-teal-800 to-cyan-900 text-white rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+        <svg width="320" height="320" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span class="bg-emerald-500/30 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/40">
+              Galápagos Life Fund (GLF)
+            </span>
+            <span class="bg-cyan-500/30 text-cyan-200 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-400/40">
+              Producto 1: Diagnóstico Institucional
+            </span>
+            <span class="bg-amber-500/30 text-amber-200 text-xs font-semibold px-3 py-1 rounded-full border border-amber-400/40">
+              Área de Sostenibilidad (SGAS)
+            </span>
+            <span class="bg-emerald-400/20 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full border border-emerald-300/40">
+              Documento Final Validado
+            </span>
+          </div>
+          <h1 class="text-2xl md:text-4xl font-black tracking-tight text-white">
+            Evaluación de Riesgos Ambientales y Sociales (VEAS & PGAS)
+          </h1>
+          <p class="text-emerald-100 text-sm md:text-base mt-2 max-w-3xl leading-relaxed">
+            Diagnóstico institucional consolidado, flujos de procesos y datos, catálogo de procedimientos operativos estándar a formalizar y arquitectura de modernización tecnológica con Software e Inteligencia Artificial.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row md:flex-col items-end gap-2 shrink-0">
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/20 text-right w-full sm:w-auto">
+            <p class="text-xs text-emerald-200 font-medium">Equipo Responsable GLF:</p>
+            <p class="text-sm font-bold text-white">Verónica Santamaría & Ulf Hårdter</p>
+            <p class="text-xs text-slate-300">Área de Sostenibilidad</p>
+          </div>
+          <button onclick="window.print()" class="no-print bg-white/20 hover:bg-white/30 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS DE NAVEGACIÓN -->
+    <div class="no-print bg-white rounded-xl shadow-sm border border-slate-200 p-2 flex flex-wrap gap-2 sticky top-2 z-50">
+      <button onclick="switchTab('tab-proceso')" id="btn-tab-proceso" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all bg-emerald-600 text-white shadow-sm">
+        1. Proceso y Cronograma AS-IS
+      </button>
+      <button onclick="switchTab('tab-herramientas')" id="btn-tab-herramientas" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+        2. Anatomía de VEAS y PGAS
+      </button>
+      <button onclick="switchTab('tab-dolencias')" id="btn-tab-dolencias" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+        3. Brechas & Ausencia de Procedimientos
+      </button>
+      <button onclick="switchTab('tab-sops')" id="btn-tab-sops" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+        4. Catálogo de Procedimientos (SOPs)
+      </button>
+      <button onclick="switchTab('tab-propuesta')" id="btn-tab-propuesta" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+        5. Transformación Digital con IA & Software
+      </button>
+      <button onclick="switchTab('tab-roadmap')" id="btn-tab-roadmap" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+        6. Hoja de Ruta & Impacto
+      </button>
+    </div>
+
+    <!-- ==================== TAB 1: PROCESO Y CRONOGRAMA AS-IS ==================== -->
+    <div id="tab-proceso" class="tab-content space-y-6">
+      
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">Marco Normativo</p>
+          <p class="text-xl font-bold text-emerald-700 mt-1">IFC PS1 a PS8</p>
+          <p class="text-xs text-slate-600 mt-1">+ DFC ESPP, OIT, Guías BM</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">Filtro de Exclusión</p>
+          <p class="text-xl font-bold text-red-600 mt-1">17 Criterios</p>
+          <p class="text-xs text-slate-600 mt-1">Knock-Out si responde "SÍ"</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">Evaluación Detallada</p>
+          <p class="text-xl font-bold text-cyan-700 mt-1">35 Preguntas</p>
+          <p class="text-xs text-slate-600 mt-1">Mapeadas a Normas IFC</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold text-slate-500 uppercase">Regla de Desembolso</p>
+          <p class="text-xl font-bold text-amber-600 mt-1">3 de 3 Aprobados</p>
+          <p class="text-xs text-slate-600 mt-1">Técnico + Financiero + Salvaguardas</p>
+        </div>
+      </div>
+
+      <!-- Cronología de 5 Fases -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+          <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-sm font-bold">1</span>
+          Ciclo Cronológico de las Salvaguardas Ambientales y Sociales
+        </h2>
+
+        <div class="relative border-l-2 border-emerald-500 ml-4 md:ml-6 pl-6 md:pl-8 space-y-8 my-6">
+
+          <!-- Fase 1 -->
+          <div class="relative group">
+            <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-emerald-600 border-4 border-white shadow"></div>
+            <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2.5 py-0.5 rounded-md">
+                  Fase 1: Convocatoria & Screening Inicial
+                </span>
+                <span class="text-xs font-medium text-slate-500">Día 0 al Día 30</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800 mt-2">Recepción de Nota Conceptual y Filtro Knock-Out</h3>
+              <p class="text-sm text-slate-600 mt-1">
+                El proponente postula por correo institucional. Oficiales de Programa revisan cumplimiento administrativo. Sostenibilidad aplica la <strong>Lista de Exclusión (Pestaña 2: 17 criterios)</strong>: si hay un solo "SÍ", queda descalificado. Si pasa, se responde el <strong>Examen A&S (Pestaña 3: 23 preguntas)</strong> y se emite la <strong>Categorización Provisional (A, B o C)</strong>. Los proyectos Categoría A quedan excluidos según la política DFC/GLF.
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2 text-xs">
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumo: Nota Conceptual</span>
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Herramienta: VEAS Pestañas 2 y 3</span>
+                <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded font-medium">Hito: Preselección CAT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 2 -->
+          <div class="relative group">
+            <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-cyan-600 border-4 border-white shadow"></div>
+            <div class="bg-cyan-50/50 border border-cyan-200 rounded-xl p-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-800 bg-cyan-200/60 px-2.5 py-0.5 rounded-md">
+                  Fase 2: Preselección & Assessment Detallado
+                </span>
+                <span class="text-xs font-medium text-slate-500">Día 31 al Día 75</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800 mt-2">Evaluación A&S de la Propuesta Completa (ESA) & Acompañamiento</h3>
+              <p class="text-sm text-slate-600 mt-1">
+                Los preseleccionados son convocados a presentar su Propuesta Completa. Sostenibilidad brinda <strong>acompañamiento técnico</strong> a pequeños y medianos proponentes. Se diligencia la <strong>ESA (Pestaña 4: 35 preguntas)</strong>, se activan las Normas de Desempeño IFC y se corre la <strong>Matriz de Riesgo 5x5</strong> (Severidad x Probabilidad). Se diferencian medidas exigidas "Con la propuesta" vs. "Con el PGAS".
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2 text-xs">
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Insumo: Propuesta Completa</span>
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Herramienta: VEAS Pestaña 4 & Matriz 5x5</span>
+                <span class="bg-cyan-100 text-cyan-800 px-2 py-1 rounded font-medium">Hito: ESA Dictaminada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 3 -->
+          <div class="relative group">
+            <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-indigo-600 border-4 border-white shadow"></div>
+            <div class="bg-indigo-50/50 border border-indigo-200 rounded-xl p-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-800 bg-indigo-200/60 px-2.5 py-0.5 rounded-md">
+                  Fase 3: Dictamen VEAS, Aprobación & Formalización
+                </span>
+                <span class="text-xs font-medium text-slate-500">Día 76 al Día 90</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800 mt-2">Emisión del Informe VEAS y Contractualización del PGAS</h3>
+              <p class="text-sm text-slate-600 mt-1">
+                Sostenibilidad genera el <strong>Informe VEAS (Pestaña 5)</strong> con la recomendación formal al CAT y a la Junta Directiva. Tras la aprobación, se traslada el <strong>Esquema del PGAS (Pestaña 6)</strong> al documento formal de Word (600 párrafos, 13 tablas), el cual se convierte en un <strong>Anexo Vinculante al Contrato de Subvención</strong> revisado por Cumplimiento y Legal.
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2 text-xs">
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Entregable: Informe VEAS al CAT</span>
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Documento: PGAS Word + Anexo Contractual</span>
+                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-medium">Hito: Convenio Firmado</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 4 -->
+          <div class="relative group">
+            <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-amber-500 border-4 border-white shadow"></div>
+            <div class="bg-amber-50/50 border border-amber-200 rounded-xl p-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-md">
+                  Fase 4: Ejecución, TDRs & Monitoreo Trimestral
+                </span>
+                <span class="text-xs font-medium text-slate-500">Mes 1 al Mes 36 (Frecuencia Trimestral)</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800 mt-2">Revisión de TDRs, Verificación de Campo y Condición de Desembolsos</h3>
+              <p class="text-sm text-slate-600 mt-1">
+                <strong>Control Previo:</strong> Antes de compras, obras o astilleros, Sostenibilidad revisa los Términos de Referencia (TDR) para validar cláusulas ambientales y laborales. <br>
+                <strong>Control Periódico:</strong> Cada trimestre el ejecutor presenta 3 informes. Sostenibilidad audita verificables (EPP, contratos, quejas, residuos). <strong class="text-amber-900">Regla de Oro:</strong> Los 3 informes (Técnico, Financiero y Salvaguardas) deben estar aprobados para que la Dirección Financiera libere el siguiente desembolso.
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2 text-xs">
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Control Previo: Revisión A&S de TDRs</span>
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Monitoreo: Informe Trimestral PGAS</span>
+                <span class="bg-amber-100 text-amber-900 px-2 py-1 rounded font-bold">Condición: Visto Bueno 3/3 para Pago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 5 -->
+          <div class="relative group">
+            <div class="absolute -left-[33px] md:-left-[41px] top-0 w-6 h-6 rounded-full bg-emerald-700 border-4 border-white shadow"></div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-200 px-2.5 py-0.5 rounded-md">
+                  Fase 5: Auditoría Final & Cierre Institucional
+                </span>
+                <span class="text-xs font-medium text-slate-500">Mes de Cierre</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-800 mt-2">Dictamen de Cierre de Salvaguardas, Finiquito y Último Desembolso</h3>
+              <p class="text-sm text-slate-600 mt-1">
+                Sostenibilidad valida el cumplimiento acumulado de todas las salvaguardas del PGAS. Se cruza con el informe técnico final, la rendición financiera y la verificación del inventario y destino de bienes/activos (cláusula 9.11). Se firma el Acta de Finiquito y se liquida el último desembolso.
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2 text-xs">
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Validación: 100% Medidas PGAS</span>
+                <span class="bg-white px-2 py-1 rounded border border-slate-200 font-mono text-slate-700">Instrumento: Acta de Finiquito</span>
+                <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded font-medium">Hito: Cierre Definitivo</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Diagrama Conceptual del Flujo de Información -->
+      <div class="bg-slate-900 text-white rounded-xl p-6 shadow-md">
+        <h3 class="text-base font-bold text-emerald-400 mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Arquitectura de Datos y Dependencias del Desembolso
+        </h3>
+        <p class="text-xs text-slate-300 mb-4">
+          La gestión de salvaguardas no es un trámite aislado: es una compuerta crítica para la liquidez de los proyectos en territorio.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <div class="bg-slate-800/80 p-4 rounded-lg border border-slate-700">
+            <div class="text-emerald-400 font-bold text-sm mb-1">Informe Técnico</div>
+            <p class="text-xs text-slate-400">Oficiales de Programa / Conservación</p>
+            <div class="mt-3 text-xs bg-slate-900/60 py-1.5 px-2 rounded text-slate-300">Cumplimiento de metas e hitos de conservación</div>
+          </div>
+          <div class="bg-slate-800/80 p-4 rounded-lg border border-slate-700">
+            <div class="text-cyan-400 font-bold text-sm mb-1">Informe Financiero</div>
+            <p class="text-xs text-slate-400">Dirección Financiera (Xavier Serrano)</p>
+            <div class="mt-3 text-xs bg-slate-900/60 py-1.5 px-2 rounded text-slate-300">Justificación de gastos, facturas y bancos</div>
+          </div>
+          <div class="bg-slate-800/80 p-4 rounded-lg border border-emerald-500/50 relative">
+            <span class="absolute -top-2 -right-2 bg-emerald-500 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-full">CORE</span>
+            <div class="text-amber-400 font-bold text-sm mb-1">Informe de Salvaguardas</div>
+            <p class="text-xs text-slate-400">Sostenibilidad (Verónica / Ulf)</p>
+            <div class="mt-3 text-xs bg-slate-900/60 py-1.5 px-2 rounded text-slate-300">Verificables PGAS: SST, EPP, quejas y residuos</div>
+          </div>
+        </div>
+        <div class="mt-4 p-3 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-center text-xs text-emerald-200">
+          <strong>Condición Resolutoria:</strong> Si falta la aprobación de cualquiera de los 3 informes, el desembolso permanece legal y financieramente congelado.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 2: ANATOMÍA DE VEAS Y PGAS ==================== -->
+    <div id="tab-herramientas" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-2">Desglose Técnico de la Suite de Salvaguardas</h2>
+        <p class="text-sm text-slate-600">
+          El proceso opera actualmente a través de un libro Excel de 9 pestañas (`HERRAMIENTA VEAS...xlsx`) y un documento maestro de especificación contractual en Word (`05072026 PGAS...docx`).
+        </p>
+      </div>
+
+      <!-- Grid de las 9 pestañas de VEAS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <!-- Pestaña 0 y 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-slate-100 text-slate-700">Pestañas 0 & 1</span>
+            <span class="text-xs text-emerald-700 font-medium">Gobernanza & Metadatos</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Instrucciones & Perfil General</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>Pestaña 0:</strong> Regla de segregación: celdas azules exclusivas para el proponente; columnas de revisión para GLF. <br>
+            <strong>Pestaña 1:</strong> Captura ID del proyecto, Proponente, Socios (WildAid, Jocotoco, Armada, DPNG), Tipo de subvención (Pequeña, Mediana, Grande) y presupuesto.
+          </p>
+        </div>
+
+        <!-- Pestaña 2 -->
+        <div class="bg-white rounded-xl border border-red-200 p-5 shadow-sm space-y-3 relative">
+          <span class="absolute top-3 right-3 bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Knock-Out</span>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-red-50 text-red-800">Pestaña 2: Lista EX</span>
+            <span class="text-xs text-red-600 font-medium">17 Criterios + A-H</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Lista de Exclusión Directa</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Filtro de admisibilidad basado en listas DFC e IFC. Si contesta <strong>"SÍ"</strong> a una sola pregunta, el proyecto se descarta sin excepción. <br>
+            <em>Exclusiones críticas:</em> Minería/petróleo, especies invasoras, tala comercial, reasentamiento forzoso, trabajo infantil, pesca destructiva y <strong>Categoría A (Alto Riesgo)</strong>.
+          </p>
+        </div>
+
+        <!-- Pestaña 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-50 text-emerald-800">Pestaña 3: Screening</span>
+            <span class="text-xs text-emerald-600 font-medium">23 Preguntas</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Examen A&S Nota Conceptual</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Screening ágil en 9 bloques (A a I). El proponente llena respuestas preliminares y el revisor de GLF define la <strong>Categorización Provisional</strong>: <br>
+            • <strong>Cat. A:</strong> Alto Riesgo $\rightarrow$ No financiable.<br>
+            • <strong>Cat. B:</strong> Medio a Sustancial $\rightarrow$ Requiere PGAS.<br>
+            • <strong>Cat. C:</strong> Bajo Riesgo $\rightarrow$ Requisitos mínimos.
+          </p>
+        </div>
+
+        <!-- Pestaña 4 -->
+        <div class="bg-white rounded-xl border border-cyan-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-cyan-50 text-cyan-800">Pestaña 4: ESA</span>
+            <span class="text-xs text-cyan-600 font-medium">35 Preguntas</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Evaluación A&S Detallada</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Evaluación exhaustiva por cada Norma de Desempeño IFC (ND1 a ND8). Mapea mitigaciones requeridas. <br>
+            El evaluador GLF indica en Columna K si la acción se exige: <br>
+            <strong>• "Con la propuesta"</strong> (condición previa de adjudicación). <br>
+            <strong>• "Con el PGAS"</strong> (entregable durante la ejecución).
+          </p>
+        </div>
+
+        <!-- Nivel de Riesgo -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-50 text-amber-800">Calculadora 5x5</span>
+            <span class="text-xs text-amber-600 font-medium">Score 1 a 25</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Matriz de Nivel de Riesgo</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Herramienta matricial cuantitativa: <br>
+            <strong>Gravedad (1 a 5) × Probabilidad (1 a 5)</strong> <br>
+            • <em>1 a 4 (Bajo):</em> Rutinario. <br>
+            • <em>5 a 9 (Medio):</em> Mitigación estándar. <br>
+            • <em>10 a 14 (Sustancial):</em> Planes específicos. <br>
+            • <em>15 a 25 (Alto):</em> Inadmisible o reingeniería.
+          </p>
+        </div>
+
+        <!-- Pestaña 5 -->
+        <div class="bg-white rounded-xl border border-indigo-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-indigo-50 text-indigo-800">Pestaña 5: Informe</span>
+            <span class="text-xs text-indigo-600 font-medium">Dictamen CAT</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Informe Técnico VEAS</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Reporte oficial para el Comité Asesor Técnico. Responde: <br>
+            1. ¿Satisface SGAS para recomendación? (SÍ/NO). <br>
+            2. ¿Riesgos en Derechos Humanos? <br>
+            3. ¿Restricción de acceso a recursos naturales? <br>
+            Establece los <strong>5 Estándares Obligatorios</strong> y requisitos específicos.
+          </p>
+        </div>
+
+        <!-- Pestaña 6 -->
+        <div class="bg-white rounded-xl border border-emerald-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-50 text-emerald-800">Pestaña 6: PGAS</span>
+            <span class="text-xs text-emerald-600 font-medium">Matriz Operativa</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Esquema Matriz del PGAS</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Estructura operativa para el ejecutor: <br>
+            • Instrumento exigido (ej. Residuos, SST, Quejas). <br>
+            • Plazo de entrega (1Q, 2Q...). <br>
+            • Indicadores cuantificables y medios de verificación. <br>
+            • Frecuencia de monitoreo (mensual/trimestral). <br>
+            • Parte responsable en la organización beneficiaria.
+          </p>
+        </div>
+
+        <!-- Documento Word PGAS -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3 md:col-span-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-slate-100 text-slate-800">Documento Word PGAS</span>
+            <span class="text-xs text-slate-600 font-mono">619 Párrafos | 13 Tablas</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Plan de Gestión Ambiental y Social Contractual</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Instrumento legal vinculante anexo al contrato. Contiene los protocolos operacionales detallados: uso proporcional de la fuerza en patrullajes marítimos (convenio ARE/DPNG), gestión de aguas de sentina y derrames de hidrocarburos, SST en astilleros, protocolos de bioseguridad frente a especies invasoras y anexos mandatorios (Anexo G-1: PPPI, Mecanismo de Quejas y Reporte de Incidentes Graves en menos de 48 horas).
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Los 5 Estándares Mandatorios para TODO proyecto -->
+      <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-200 p-6">
+        <h3 class="font-bold text-emerald-900 text-base mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Los 5 Instrumentos Estándar Mandatorios (Parte 3 del Informe VEAS)
+        </h3>
+        <p class="text-xs text-emerald-800 mb-4">
+          Sin importar si el proyecto es clasificado como Categoría B o C, estos 5 instrumentos son exigidos contractualmente a absolutamente todos los proyectos financiados por el GLF:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 text-xs">
+          <div class="bg-white p-3 rounded-lg border border-emerald-200 shadow-2xs">
+            <span class="font-bold text-emerald-700 block mb-1">1. Condiciones Laborales</span>
+            <span class="text-slate-600">Contratos legales, SST, descanso digno y prohibición de trabajo infantil (ND2).</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-emerald-200 shadow-2xs">
+            <span class="font-bold text-emerald-700 block mb-1">2. Mecanismo de Quejas</span>
+            <span class="text-slate-600">Canal accesible, confidencial y gratuito para personal y comunidades (ND1).</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-emerald-200 shadow-2xs">
+            <span class="font-bold text-emerald-700 block mb-1">3. Plan PPPI</span>
+            <span class="text-slate-600">Participación informada y continua de partes interesadas locales y pescadores (ND1).</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-emerald-200 shadow-2xs">
+            <span class="font-bold text-emerald-700 block mb-1">4. Compromiso Género</span>
+            <span class="text-slate-600">Inclusión efectiva de mujeres en roles operativos y de liderazgo y prevención de VBG.</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-emerald-200 shadow-2xs">
+            <span class="font-bold text-emerald-700 block mb-1">5. Reporte de Accidentes</span>
+            <span class="text-slate-600">Protocolo de notificación obligatoria inmediata ante incidentes graves o fatales.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 3: BRECHAS & AUSENCIA DE PROCEDIMIENTOS ==================== -->
+    <div id="tab-dolencias" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-2">Diagnóstico Factual de Brechas Estructurales (AS-IS)</h2>
+        <p class="text-sm text-slate-600">
+          Validado con el equipo de Sostenibilidad. El GLF es una institución joven (2023) que opera con alto rigor técnico pero <strong>sin manuales de procedimientos operativos formalizados por escrito</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Brecha 1 -->
+        <div class="bg-red-50/60 border border-red-200 rounded-xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-red-700 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-red-200 text-red-800 flex items-center justify-center text-xs">1</span>
+            Ausencia de Procedimientos Escritos (GLF en Consolidación)
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            Inexistencia de Manuales de Procedimientos Operativos Estándar (SOP), protocolos formales de escalamiento de alertas ni directrices institucionales de coordinación. Las decisiones recaen en la memoria y criterio técnico individual de los especialistas.
+          </p>
+          <div class="text-[11px] bg-white/80 p-2 rounded text-red-900 border border-red-150">
+            <strong>Impacto:</strong> Vulnerabilidad ante auditorías externas de donantes y riesgo operativo por dependencia de personas.
+          </div>
+        </div>
+
+        <!-- Brecha 2 -->
+        <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-amber-800 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center text-xs">2</span>
+            Fragmentación Instrumental (Excel vs. Word)
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            La evaluación vive en un libro Excel de 9 pestañas y el PGAS vive en un documento Word de 600 párrafos. El traspaso de indicadores, verificables y cronogramas se hace <strong>manualmente mediante copiar y pegar</strong>, generando desfasajes e inconsistencias.
+          </p>
+          <div class="text-[11px] bg-white/80 p-2 rounded text-amber-900 border border-amber-150">
+            <strong>Impacto:</strong> Riesgo de discrepancia legal entre lo evaluado en VEAS y lo exigido contractualmente en el convenio.
+          </div>
+        </div>
+
+        <!-- Brecha 3 -->
+        <div class="bg-blue-50/60 border border-blue-200 rounded-xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-blue-800 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-xs">3</span>
+            Comunicaciones Fragmentadas hacia los Proponentes
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            Los proponentes con observaciones reciben correos independientes de múltiples áreas del GLF (Programas, Finanzas, Legal/Cumplimiento y Sostenibilidad). Esto genera <strong>confusión en los ejecutores</strong>, quienes no saben qué observación priorizar.
+          </p>
+          <div class="text-[11px] bg-white/80 p-2 rounded text-blue-900 border border-blue-150">
+            <strong>Impacto:</strong> Subsanaciones deficientes, duplicidad de mensajes y retrasos en la firma de contratos.
+          </div>
+        </div>
+
+        <!-- Brecha 4 -->
+        <div class="bg-purple-50/60 border border-purple-200 rounded-xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-purple-800 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-purple-200 text-purple-800 flex items-center justify-center text-xs">4</span>
+            Falta de Protocolo Escalonado para Alertas de Incumplimiento
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            Cuando un proyecto presenta retrasos o incumplimientos en una salvaguarda ambiental (ej. no entrega de manifiestos de residuos peligrosos o falta de EPP), <strong>no existe un procedimiento escrito ni un semáforo estándar</strong> para determinar si se congela el desembolso total, si se condiciona parcialmente o si se escala a la Dirección Ejecutiva.
+          </p>
+          <div class="text-[11px] bg-white/80 p-2 rounded text-purple-900 border border-purple-150">
+            <strong>Impacto:</strong> Incertidumbre jurídica y discrecionalidad en la retención o liberación de fondos.
+          </div>
+        </div>
+
+        <!-- Brecha 5 -->
+        <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-rose-800 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-rose-200 text-rose-800 flex items-center justify-center text-xs">5</span>
+            Desorden en Repositorios de Google Drive
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            No existe una taxonomía homogénea de carpetas creada y controlada por GLF. Cada proyecto sube verificables en carpetas arbitrarias, mezclando borradores con versiones finales. No hay permisos diferenciados ni trazabilidad sobre quién modificó un documento de salvaguardas.
+          </p>
+          <div class="text-[11px] bg-white/80 p-2 rounded text-rose-900 border border-rose-150">
+            <strong>Impacto:</strong> Pérdida de tiempo en búsqueda de documentos y descontrol de versiones finales.
+          </div>
+        </div>
+
+        <!-- Brecha 6 -->
+        <div class="bg-slate-100 border border-slate-300 rounded-xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-slate-300 text-slate-800 flex items-center justify-center text-xs">6</span>
+            Auditoría de Verificables Manual y Reactiva
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            Cada trimestre, el equipo revisa visualmente cientos de fotografías (lanchas, chalecos salvavidas, talleres comunitarios) y listas de asistencia escaneadas en PDF. Es imposible validar de forma manual si una fotografía corresponde al trimestre actual o si fue reciclada de un informe anterior.
+          </p>
+          <div class="text-[11px] bg-white/80 p-2 rounded text-slate-900 border border-slate-200">
+            <strong>Impacto:</strong> Fatiga en el revisor y debilidad en el control de veracidad de evidencias en territorio insular.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 4: CATÁLOGO DE PROCEDIMIENTOS (SOPS) ==================== -->
+    <div id="tab-sops" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">Formalización Normativa</span>
+            <h2 class="text-xl font-black text-slate-900 mt-2">Catálogo de los 7 Procedimientos Operativos a Estandarizar (SOPs)</h2>
+          </div>
+          <span class="text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            Base para la Codificación en Software
+          </span>
+        </div>
+        <p class="text-sm text-slate-600 mt-2">
+          Para subsanar el vacío de documentación formal identificado, el GLF debe formalizar e incorporar en su marco normativo interno los siguientes procedimientos estándar:
+        </p>
+      </div>
+
+      <div class="space-y-4">
+
+        <!-- SOP 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-100 text-emerald-800">SOP-01</span>
+            <span class="text-xs text-slate-500 font-medium">Fase 1: Convocatoria</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Procedimiento de Screening y Categorización de Riesgos A&S</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Regula la aplicación estricta del filtro Knock-Out (Lista EX de 17 criterios), el examen preliminar de la Nota Conceptual (23 preguntas) y la resolución de categorización ambiental y social (A: Excluido; B: Medio a Sustancial; C: Bajo).
+          </p>
+        </div>
+
+        <!-- SOP 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-cyan-100 text-cyan-800">SOP-02</span>
+            <span class="text-xs text-slate-500 font-medium">Fase 2: Preselección</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Procedimiento de Evaluación Detallada (ESA) y Dictamen Técnico VEAS</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Define los criterios para la activación de Normas de Desempeño IFC (ND1 a ND8), la ponderación de la matriz 5x5 de gravedad y probabilidad, y la redacción formal del Informe VEAS para consideración del Comité Asesor Técnico (CAT).
+          </p>
+        </div>
+
+        <!-- SOP 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-indigo-100 text-indigo-800">SOP-03</span>
+            <span class="text-xs text-slate-500 font-medium">Fase 3: Formalización</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Procedimiento de Formalización y Vinculación Contractual del PGAS</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Estandariza el traslado de los indicadores y medidas de mitigación desde la matriz VEAS al documento contractual formal del PGAS (13 tablas), convirtiéndolo en un Anexo Vinculante al Contrato de Subvención firmado con GLF.
+          </p>
+        </div>
+
+        <!-- SOP 4 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-100 text-amber-800">SOP-04</span>
+            <span class="text-xs text-slate-500 font-medium">Fase 4: Ejecución</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Procedimiento Escalonado de Alertas e Incumplimientos de Salvaguardas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Codifica formalmente 3 niveles de severidad: <br>
+            • <strong>Nivel 1 (Alerta Preventiva):</strong> Retraso &lt; 15 días $\rightarrow$ Notificación administrativa con SLA de 5 días. <br>
+            • <strong>Nivel 2 (Alerta Media):</strong> Falta de verificable crítico o queja desatendida $\rightarrow$ Retención cautelar del 50% al 100% del desembolso trimestral. <br>
+            • <strong>Nivel 3 (Alerta Crítica):</strong> Accidente grave o daño ambiental $\rightarrow$ Suspensión preventiva de actividades y convocatoria a comité extraordinario.
+          </p>
+        </div>
+
+        <!-- SOP 5 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-teal-100 text-teal-800">SOP-05</span>
+            <span class="text-xs text-slate-500 font-medium">Fase 4: Desembolsos</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Procedimiento de Coordinación Interdepartamental de Desembolsos (Regla 3/3)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Protocolo que articula a Oficiales de Programa, Dirección Financiera y Sostenibilidad en un flujo digital único. Regula la emisión obligatoria de la <strong>Notificación Única Consolidada</strong> hacia el beneficiario ante observaciones.
+          </p>
+        </div>
+
+        <!-- SOP 6 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-purple-100 text-purple-800">SOP-06</span>
+            <span class="text-xs text-slate-500 font-medium">Fase 4: Adquisiciones</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Procedimiento de Control Previo A&S a Términos de Referencia (TDR)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Regula la revisión y visto bueno obligatorio de salvaguardas antes de que un ejecutor contrate servicios de astilleros, motores, embarcaciones u obras civiles, asegurando la inclusión de cláusulas de SST, residuos peligrosos y condiciones laborales.
+          </p>
+        </div>
+
+        <!-- SOP 7 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-rose-100 text-rose-800">SOP-07</span>
+            <span class="text-xs text-slate-500 font-medium">Transversal</span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Procedimiento de Quejas y Notificación Inmediata de Incidentes Graves (&lt; 48h)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Establece los canales de atención y trazabilidad del Mecanismo de Quejas y el protocolo perentorio de reporte ante contingencias marítimas o accidentes fatales en menos de 48 horas para dar estricto cumplimiento a los requerimientos de la DFC e IFC.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 5: PROPUESTA DE TRANSFORMACIÓN DIGITAL CON IA ==================== -->
+    <div id="tab-propuesta" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-3 py-1 rounded-full">Arquitectura TO-BE</span>
+            <h2 class="text-xl font-black text-slate-900 mt-2">Ecosistema SGAS Digital Inteligente (Digital-First)</h2>
+          </div>
+          <span class="text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            Software Web + Modelos de IA Generativa & Visión
+          </span>
+        </div>
+        <p class="text-sm text-slate-600 mt-2">
+          La oportunidad estratégica del GLF consiste en codificar directamente los 7 procedimientos formalizados en una plataforma tecnológica en la nube, evitando la burocracia en papel.
+        </p>
+      </div>
+
+      <!-- Los 6 Módulos Tecnológicos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- Módulo 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-purple-300 transition-all space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-base">
+            01
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Portal Web del Proponente (VEAS Digital)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Reemplaza el archivo Excel por una aplicación web interactiva. Incluye validación inmediata de la <strong>Lista de Exclusión en tiempo real</strong>: si marca una causal prohibida, el sistema le explica el porqué antes del envío. Genera automáticamente la estructura estándar de carpetas en Drive.
+          </p>
+          <div class="pt-2 border-t border-slate-100 text-[11px] font-mono text-purple-700">
+            Sistematiza: SOP-01 (Screening) y Taxonomía Drive
+          </div>
+        </div>
+
+        <!-- Módulo 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-emerald-300 transition-all space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-base">
+            02
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Copiloto IA de Salvaguardas (RAG)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Asistente conversacional entrenado con las <strong>Normas IFC, Directrices BM, SGAS GLF y Planes de Manejo de Galápagos</strong>. 
+            Guía al proponente en lenguaje coloquial para redactar sus planes de mitigación y asiste al evaluador de GLF pre-calificando riesgos y redactando borradores del informe VEAS.
+          </p>
+          <div class="pt-2 border-t border-slate-100 text-[11px] font-mono text-emerald-700">
+            Sistematiza: SOP-02 (Evaluación ESA Asistida)
+          </div>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-cyan-300 transition-all space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold text-base">
+            03
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Auto-Generador Documental del PGAS</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Al aprobarse la ESA en la plataforma, un motor documental compila automáticamente el <strong>documento contractual del PGAS en Word/PDF (con sus 13 tablas)</strong> y la matriz de indicadores viva. Elimina la digitación manual y la desincronización entre lo evaluado y lo contratado.
+          </p>
+          <div class="pt-2 border-t border-slate-100 text-[11px] font-mono text-cyan-700">
+            Sistematiza: SOP-03 (PGAS Vinculante Contractual)
+          </div>
+        </div>
+
+        <!-- Módulo 4 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-amber-300 transition-all space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-base">
+            04
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Auditoría Visual de Evidencias (Computer Vision & OCR)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Algoritmos de visión computacional que analizan fotos subidas por los ejecutores: detectan uso de <strong>chalecos salvavidas, cascos y EPP</strong> en faenas de patrullaje o astilleros. OCR inteligente que extrae firmas y participantes en listas de asistencia y valida fechas para evitar fotos recicladas.
+          </p>
+          <div class="pt-2 border-t border-slate-100 text-[11px] font-mono text-amber-700">
+            Sistematiza: SOP-06 (Control TDR) y Auditoría Trimestral
+          </div>
+        </div>
+
+        <!-- Módulo 5 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-indigo-300 transition-all space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-base">
+            05
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Orquestador Tripartita de Desembolsos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Mesa de control unificada con semáforo digital <strong>"Disbursement-Ready"</strong>. Conecta a Programas, Finanzas y Sostenibilidad. Solo cuando los 3 marcan aprobación verde, se genera la orden de pago. Consolida automáticamente las observaciones de todas las áreas en una sola notificación para el ejecutor.
+          </p>
+          <div class="pt-2 border-t border-slate-100 text-[11px] font-mono text-indigo-700">
+            Sistematiza: SOP-04 (Alertas) y SOP-05 (Regla 3/3)
+          </div>
+        </div>
+
+        <!-- Módulo 6 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-rose-300 transition-all space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-base">
+            06
+          </div>
+          <h3 class="font-bold text-slate-800 text-base">Canal Omnicanal de Quejas & Alerta de Incidentes</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Bot de WhatsApp institucional y formulario móvil accesible para pescadores y tripulantes. Permite reportar incidentes con audio, foto y geolocalización. Dispara alertas automáticas por SMS/Email al equipo de Sostenibilidad ante incidentes graves para cumplir el estándar de notificación internacional de 24-48 horas.
+          </p>
+          <div class="pt-2 border-t border-slate-100 text-[11px] font-mono text-rose-700">
+            Sistematiza: SOP-07 (Quejas y Contingencias &lt; 48h)
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Arquitectura de Integración -->
+      <div class="bg-slate-900 text-white rounded-xl p-6 shadow-md">
+        <h3 class="text-base font-bold text-white mb-2">Estructura Tecnológica Recomendada</h3>
+        <p class="text-xs text-slate-400 mb-4">
+          Diseñada para operar en la nube con alta seguridad, interoperabilidad con Google Workspace (Google Drive institucional) y modelos de lenguaje de última generación.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+            <span class="text-purple-400 font-bold block mb-1">Frontend / UX</span>
+            <span class="text-slate-300">Next.js / React con Tailwind CSS. Experiencia tipo wizard paso a paso para proponentes.</span>
+          </div>
+          <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+            <span class="text-cyan-400 font-bold block mb-1">Backend & Datos</span>
+            <span class="text-slate-300">API REST en Node/Python con PostgreSQL para base relacional de proyectos y matrices de riesgo.</span>
+          </div>
+          <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+            <span class="text-emerald-400 font-bold block mb-1">IA & RAG</span>
+            <span class="text-slate-300">Embeddings vectoriales con marco IFC PS1-8, SGAS y Gemini 1.5 Pro / Flash para inferencia semántica rápida.</span>
+          </div>
+          <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+            <span class="text-amber-400 font-bold block mb-1">Visión & Documentos</span>
+            <span class="text-slate-300">Modelos de visión por computadora para detección de objetos (EPP) y Google Drive API para archivado estructurado.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 6: HOJA DE RUTA & IMPACTO ==================== -->
+    <div id="tab-roadmap" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-2">Hoja de Ruta de Implementación Progresiva (Roadmap)</h2>
+        <p class="text-sm text-slate-600">
+          Estrategia modular en tres fases para formalizar normativamente los procesos e implementar la tecnología de forma articulada.
+        </p>
+      </div>
+
+      <!-- Fases del Roadmap -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <!-- Fase 1: Quick Wins -->
+        <div class="bg-white rounded-xl border border-emerald-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Fase 1: Formalización & Quick Wins</span>
+            <span class="text-xs font-semibold text-slate-500">Mes 1 - 2</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Manuales SOP & Formularios Base</h3>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4">
+            <li>Redacción y aprobación formal de los 7 Manuales de Procedimiento (SOPs).</li>
+            <li>Estandarización y automatización de la taxonomía de carpetas en Google Drive por proyecto.</li>
+            <li>Digitalización de la Lista de Exclusión y Screening de Nota Conceptual en formulario web.</li>
+            <li>Creación del Banco Institucional de Preguntas Frecuentes (FAQ) de Salvaguardas.</li>
+          </ul>
+          <div class="pt-2 border-t border-slate-100 text-[11px] text-emerald-700 font-semibold">
+            Entregable: Manuales SGAS formalizados y screening online.
+          </div>
+        </div>
+
+        <!-- Fase 2: Core Platform -->
+        <div class="bg-white rounded-xl border border-cyan-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="bg-cyan-100 text-cyan-800 text-xs font-bold px-2.5 py-1 rounded">Fase 2: Plataforma Core</span>
+            <span class="text-xs font-semibold text-slate-500">Mes 3 - 5</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Portal VEAS & Workflow de Pagos</h3>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4">
+            <li>Portal web completo para la postulación y evaluación detallada ESA (35 preguntas).</li>
+            <li>Módulo autogenerador del documento formal PGAS en Word y matriz de seguimiento.</li>
+            <li>Workflow colaborativo tripartita de desembolsos con semáforo digital en tiempo real.</li>
+            <li>Módulo unificado de comunicaciones y observaciones consolidada para proponentes.</li>
+          </ul>
+          <div class="pt-2 border-t border-slate-100 text-[11px] text-cyan-700 font-semibold">
+            Entregable: Sistema central SGAS integrado y pagos automatizados.
+          </div>
+        </div>
+
+        <!-- Fase 3: IA Avanzada -->
+        <div class="bg-white rounded-xl border border-purple-200 p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded">Fase 3: IA Avanzada</span>
+            <span class="text-xs font-semibold text-slate-500">Mes 6 - 8</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Copiloto RAG & Visión Artificial</h3>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4">
+            <li>Despliegue del Copiloto de Salvaguardas con IA (RAG) para proponentes y técnicos GLF.</li>
+            <li>Módulo de Computer Vision y OCR para validación automatizada de fotos de EPP y actas.</li>
+            <li>Canal omnicanal de WhatsApp para el Mecanismo de Gestión de Quejas y reporte de accidentes.</li>
+            <li>Tablero ejecutivo de analítica predictiva de riesgos socioambientales en el archipiélago.</li>
+          </ul>
+          <div class="pt-2 border-t border-slate-100 text-[11px] text-purple-700 font-semibold">
+            Entregable: Ecosistema SGAS inteligente y autónomo.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cuadro de Beneficios y Retorno de Inversión -->
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+        <h3 class="text-base font-bold text-slate-900 mb-4">Matriz de Impacto Esperado</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
+            <p class="text-2xl font-black text-emerald-600">-75%</p>
+            <p class="text-xs font-bold text-slate-700 mt-1">Tiempo de Trámite</p>
+            <p class="text-[11px] text-slate-500 mt-1">De semanas de correos a horas mediante flujos web guiados y pre-evaluación con IA.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
+            <p class="text-2xl font-black text-cyan-600">100%</p>
+            <p class="text-xs font-bold text-slate-700 mt-1">Trazabilidad de Fondos</p>
+            <p class="text-[11px] text-slate-500 mt-1">Regla 3/3 auditada digitalmente antes de cada desembolso financiero.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
+            <p class="text-2xl font-black text-purple-600">0%</p>
+            <p class="text-xs font-bold text-slate-700 mt-1">Desfase Contractual</p>
+            <p class="text-[11px] text-slate-500 mt-1">El PGAS legal coincide 1:1 con la evaluación de riesgos aprobada por el CAT.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
+            <p class="text-2xl font-black text-amber-600">&lt; 24h</p>
+            <p class="text-xs font-bold text-slate-700 mt-1">Respuesta ante Incidentes</p>
+            <p class="text-[11px] text-slate-500 mt-1">Alertas móviles directas para cumplimiento estricto de estándares DFC e IFC.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER / FIRMA -->
+    <div class="text-center text-xs text-slate-500 py-4 border-t border-slate-200">
+      <p><strong>Galápagos Life Fund (GLF)</strong> | Consultoría de Transformación Digital | Elaborado por: Schubert Lombeida</p>
+      <p class="text-[11px] text-slate-400 mt-1">Documento Técnico Final consolidado de Producto 1: Diagnóstico Institucional.</p>
+    </div>
+
+  </div>
+
+  <!-- SCRIPT INTERACTIVO -->
+  <script>
+    function switchTab(tabId) {
+      // Ocultar todos los tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+      });
+      // Mostrar el tab seleccionado
+      document.getElementById(tabId).classList.remove('hidden');
+
+      // Resetear estilos de botones
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+      });
+
+      // Activar botón clickeado
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+        activeBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+      }
+    }
+  </script>
+</body>
+</html>
